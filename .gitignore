@@ -1,8 +1,8 @@
 Debug/
 Release/
 
-AlienAttack/Debug/
-AlienAttack/Release/
+SnakeGame/Debug/
+SnakeGame/Release/
 
 *.db
 *.opendb
