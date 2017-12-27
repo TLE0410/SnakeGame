@@ -1,0 +1,10 @@
+Debug/
+Release/
+
+AlienAttack/Debug/
+AlienAttack/Release/
+
+*.db
+*.opendb
+*.suo
+*.zip
