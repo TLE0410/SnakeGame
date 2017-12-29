@@ -2,12 +2,6 @@
 #include "Fruit.h"
 #include "Utils.h"
 
-Fruit::Fruit(int x, int y)
-{
-    m_position.x = x;
-    m_position.y = y;
-}
-
 void Fruit::render()
 {
     Utils::PrintText(m_position.x, m_position.y, "F");
@@ -22,17 +16,23 @@ int Fruit::getX()
     return m_position.x;
 }
 
-void Fruit::setX(int x)
-{
-    m_position.x = x;
-}
-
 int Fruit::getY()
 {
     return m_position.y;
 }
 
-void Fruit::setY(int y)
+Point2D Fruit::getPosition()
 {
-    m_position.y = y;
+    return m_position;
+}
+
+void Fruit::generateNewPosition()
+{
+    generateRandomPosition();
+}
+
+void Fruit::generateRandomPosition()
+{
+    m_position.x = rand() % (Constants::GAME_FIELD_WIDTH - 2) + 2;
+    m_position.y = rand() % (Constants::GAME_FIELD_HEIGHT - 2) + 2;
 }

@@ -11,20 +11,13 @@ Player::Player()
 
     needToEraise = false;
     needToIncreaseLength = false;
+    isAlive = true;
 }
 
 void Player::render()
 {
-    for (Point2D* point : m_snakePositions)
-    {
-        Utils::PrintText(point->x, point->y, "o");
-    }
-
-    if (needToEraise)
-    {
-        Utils::PrintText(pointToEraise.x, pointToEraise.y, " ");
-        needToEraise = false;
-    }
+    drawSnakeBody();
+    eraiseTailIfMoved();
 }
 
 void Player::update()
@@ -96,6 +89,11 @@ void Player::update()
     }
 }
 
+void Player::die()
+{
+    isAlive = false;
+}
+
 int Player::getHeadX()
 {
     return m_snakePositions.front()->x;
@@ -104,6 +102,19 @@ int Player::getHeadX()
 int Player::getHeadY()
 {
     return m_snakePositions.front()->y;
+}
+
+Point2D Player::getHeadPosition()
+{
+    Point2D result;
+    result.x = m_snakePositions[0]->x;
+    result.y = m_snakePositions[0]->y;
+    return result;
+}
+
+Direction Player::getDirection()
+{
+    return moveDirection;
 }
 
 void Player::increaseLength()
@@ -174,3 +185,21 @@ void Player::handleInput()
         }
     }
 }
+
+void Player::drawSnakeBody()
+{
+    for (Point2D* point : m_snakePositions)
+    {
+        Utils::PrintText(point->x, point->y, "o");
+    }
+}
+
+void Player::eraiseTailIfMoved()
+{
+    if (needToEraise)
+    {
+        Utils::PrintText(pointToEraise.x, pointToEraise.y, " ");
+        needToEraise = false;
+    }
+}
+

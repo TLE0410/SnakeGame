@@ -18,8 +18,11 @@ public:
     void update();
     void handleInput();
 
+    void die();
     int getHeadX();
     int getHeadY();
+    Point2D getHeadPosition();
+    Direction getDirection();
 
     void increaseLength();
 
@@ -28,11 +31,15 @@ private:
     DWORD getInput(INPUT_RECORD **eventBuffer);
     Direction moveDirection;
 
+    bool isAlive;
     bool needToEraise;
     Point2D pointToEraise;
     bool needToIncreaseLength;
 
     steady_clock::time_point timeOfLastMove;
+
+    void drawSnakeBody();
+    void eraiseTailIfMoved();
 };
 
 #endif

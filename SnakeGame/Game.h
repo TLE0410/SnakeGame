@@ -7,6 +7,7 @@
 #include "Player.h"
 #include "Fruit.h"
 #include "Border.h"
+#include "CollisionManager.h"
 
 class Game
 {
@@ -18,13 +19,11 @@ public:
     void initialize();
 private:
     Player* m_Player;
-    std::vector<Fruit*> m_Fruits;
+    Fruit* m_Fruit;
     Border* m_Border;
     std::chrono::steady_clock::time_point timeOfTheLastFrameUpdate;
     bool gameOver;
-    void checkIfSnakeCollidesWithFruits();
-    bool snakeWillCollideWithItself();
-    bool snakeWillCollideWithWall();
+    CollisionManager* collisionManger;
 };
 
 #endif
