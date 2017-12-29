@@ -13,6 +13,8 @@ public:
     void update() {};
     void handleInput() {};
 
+    const std::vector<Point2D*> getBorder() const;
+
 private:
     std::vector<Point2D*> m_borderPoints;
 

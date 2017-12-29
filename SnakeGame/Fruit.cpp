@@ -1,10 +1,18 @@
 #include <stdio.h>
 #include "Fruit.h"
 #include "Utils.h"
+#include <string>
+
+Fruit::Fruit()
+{
+    generateRandomPosition();
+}
 
 void Fruit::render()
 {
-    Utils::PrintText(m_position.x, m_position.y, "F");
+    std::string fruitCharacter;
+    fruitCharacter = "F";
+    Utils::PrintText(m_position.x, m_position.y, fruitCharacter);
 }
 
 void Fruit::update()

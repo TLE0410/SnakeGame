@@ -1,5 +1,6 @@
 #include "Border.h"
 #include "Utils.h"
+#include <string>
 
 Border::Border()
 {
@@ -11,10 +12,17 @@ Border::Border()
 
 void Border::render()
 {
+    std::string borderPixel;
+    borderPixel = (char)219;
     for (Point2D* point : m_borderPoints)
     {
-        Utils::PrintText(point->x, point->y, "*");
+        Utils::PrintText(point->x, point->y, borderPixel);
     }
+}
+
+const std::vector<Point2D*> Border::getBorder() const
+{
+    return m_borderPoints;
 }
 
 void Border::addTopHorizontalLine()

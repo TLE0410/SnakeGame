@@ -9,17 +9,23 @@
 #include "Player.h"
 #include "Constants.h"
 
-using namespace std::chrono;
-
-Game::Game()
-{
-}
-
 void Game::update()
 {
-    //CllicheckIfSnakeCollidesWithFruits();
-    collisionManger->checkPlayerAndFruitCollision(*m_Player, *m_Fruit);
-    m_Player->update();
+    if (m_GameTimer->timeToMovePlayer())
+    {
+        if (m_collisionManger->checkPlayerAndBorderCollision(*m_Player, *m_Border)
+            || m_collisionManger->checkPlayerAndBorderCollision(*m_Player, *m_Border))
+        {
+            m_isGameOver = true;
+        }
+
+        if (m_collisionManger->checkPlayerAndFruitCollision(*m_Player, *m_Fruit))
+        {
+            m_ScoreBoard->increaseScore();
+        }
+
+        m_Player->update();
+    }
 }
 
 void Game::handleInput()
@@ -29,16 +35,17 @@ void Game::handleInput()
     
 void Game::render()
 {
-    steady_clock::time_point current_time = steady_clock::now();
-
-    auto duration = current_time - timeOfTheLastFrameUpdate;
-    if (duration > milliseconds{ 100 })
+    if (m_GameTimer->timeToRender())
     {
         m_Border->render();
         m_Fruit->render();
         m_Player->render();
+        m_ScoreBoard->render();
+    }
 
-        timeOfTheLastFrameUpdate = current_time;
+    if (m_isGameOver)
+    {
+        m_GameOver->render();
     }
 }
 
@@ -47,9 +54,20 @@ void Game::initialize()
     m_Fruit = new Fruit();
     m_Border = new Border();
     m_Player = new Player();
+    m_ScoreBoard = new ScoreBoard();
+    m_GameOver = new GameOver();
+    m_collisionManger = new CollisionManager();
+    m_GameTimer = new GameTimer();
+    m_isGameOver = false;
+}
 
-    gameOver = false;
 
-    timeOfTheLastFrameUpdate = std::chrono::steady_clock::now();
-    collisionManger = new CollisionManager();
+bool Game::isGameOver()
+{
+    return m_isGameOver;
+}
+
+void Game::printGameOver()
+{
+    
 }

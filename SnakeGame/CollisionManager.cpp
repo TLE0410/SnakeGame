@@ -1,24 +1,35 @@
 #include "CollisionManager.h"
 #include "Utils.h"
 
-void CollisionManager::checkPlayerAndFruitCollision(Player & player, Fruit & fruit)
+bool CollisionManager::checkPlayerAndFruitCollision(Player & player, Fruit & fruit)
 {
-    // get a point where player is going to be
-    Point2D headNextPosition = Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
+    Point2D headNextPosition = 
+        Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
+
     if (headNextPosition.equals(fruit.getPosition()))
     {
         player.increaseLength();
         fruit.generateNewPosition();
+        return true;
     }
+    return false;
 }
 
-void CollisionManager::checkPlayerAndBorderCollision(Player & player, Border & border)
+bool CollisionManager::checkPlayerAndBorderCollision(Player & player, const Border & border)
 {
     Point2D headNextPosition = Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
-    for (Point2D* borderPoint : border)
-
+    for (Point2D* borderPoint : border.getBorder())
+    {
+        if (headNextPosition.equals(*borderPoint))
+        {
+            player.die();
+            return true;
+        }
+    }
+    return false;
 }
 
-void CollisionManager::checkPlayerCollideItself(Player & player)
+bool CollisionManager::checkPlayerCollideItself(Player & player)
 {
+    return false;
 }

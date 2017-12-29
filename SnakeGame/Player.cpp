@@ -5,8 +5,8 @@
 Player::Player()
 {
     Point2D* startPosition = new Point2D;
-    startPosition->x = 10;
-    startPosition->y = 10;
+    startPosition->x = Constants::GAME_FIELD_WIDTH / 2;
+    startPosition->y = Constants::GAME_FIELD_HEIGHT / 2;
     m_snakePositions.push_back(startPosition);
 
     needToEraise = false;
@@ -27,13 +27,11 @@ void Player::update()
         return;
     }
 
-    steady_clock::time_point currentTime = steady_clock::now();
-    auto duration = currentTime - timeOfLastMove;
-    if (duration < milliseconds{200})
+    if (!isAlive)
     {
+        moveDirection = Direction::none;
         return;
     }
-    timeOfLastMove = currentTime;
     
     Point2D newPosition, oldPosition;
     Point2D* snakeHead = m_snakePositions.front();

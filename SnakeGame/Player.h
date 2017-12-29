@@ -35,9 +35,6 @@ private:
     bool needToEraise;
     Point2D pointToEraise;
     bool needToIncreaseLength;
-
-    steady_clock::time_point timeOfLastMove;
-
     void drawSnakeBody();
     void eraiseTailIfMoved();
 };

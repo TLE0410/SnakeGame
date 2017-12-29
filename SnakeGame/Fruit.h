@@ -7,6 +7,7 @@
 class Fruit : public GameObject
 {
 public:
+    Fruit();
     void render();
     void update();
     void handleInput() {};

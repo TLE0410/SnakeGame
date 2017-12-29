@@ -8,14 +8,14 @@
 
 namespace Utils
 {
-    void static PrintText(int x, int y, std::string text)
+    void static PrintText(int horizontalPosition, int verticalPosition, std::string text)
     {
-        printf("\033[%d;%dH%s", y + 2, x + 5, text.c_str());
+        printf("\033[%d;%dH%s", verticalPosition + 1, horizontalPosition + 5, text.c_str());
     }
 
     void static Log(std::string messageToLog)
     {
-        PrintText(5, Constants::GAME_FIELD_WIDTH + 2, messageToLog.c_str());
+        PrintText(Constants::GAME_FIELD_WIDTH + 5, 1, messageToLog.c_str());
     }
 
     Point2D static getNextPosition(const Point2D &point, const Direction &direction)
