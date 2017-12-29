@@ -5,6 +5,7 @@ SnakeGame/Debug/
 SnakeGame/Release/
 
 *.db
+*.aps
 *.opendb
 *.suo
 *.zip
