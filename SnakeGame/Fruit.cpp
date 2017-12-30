@@ -3,16 +3,16 @@
 #include "Utils.h"
 #include <string>
 
-Fruit::Fruit()
+Fruit::Fruit(const Renderer &renderingEngine) : GameObject(renderingEngine)
 {
     generateRandomPosition();
 }
 
 void Fruit::render()
 {
-    std::string fruitCharacter;
-    fruitCharacter = "F";
-    Utils::PrintText(m_position.x, m_position.y, fruitCharacter);
+    //std::string fruitCharacter;
+    //fruitCharacter = "F";
+    //Utils::PrintText(m_position.x, m_position.y, fruitCharacter);
 }
 
 void Fruit::update()

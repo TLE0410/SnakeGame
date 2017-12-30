@@ -8,7 +8,7 @@
 class Border : public GameObject
 {
 public:
-    Border();
+    Border(const Renderer &renderer);
     void render();
     void update() {};
     void handleInput() {};

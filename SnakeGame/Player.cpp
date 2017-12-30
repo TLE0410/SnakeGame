@@ -2,8 +2,9 @@
 #include "Player.h"
 #include "Utils.h"
 
-Player::Player()
+Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
 {
+    moveDirection = Direction::none;
     Point2D* startPosition = new Point2D;
     startPosition->x = Constants::GAME_FIELD_WIDTH / 2;
     startPosition->y = Constants::GAME_FIELD_HEIGHT / 2;
@@ -16,8 +17,8 @@ Player::Player()
 
 void Player::render()
 {
-    drawSnakeBody();
-    eraiseTailIfMoved();
+    //drawSnakeBody();
+    //eraiseTailIfMoved();
 }
 
 void Player::update()
@@ -32,9 +33,10 @@ void Player::update()
         moveDirection = Direction::none;
         return;
     }
-    
-    Point2D newPosition, oldPosition;
-    Point2D* snakeHead = m_snakePositions.front();
+
+    Point2D newPosition{};
+    Point2D oldPosition{};
+    const auto snakeHead = m_snakePositions.front();
     newPosition.x = snakeHead->x;
     newPosition.y = snakeHead->y;
 
@@ -137,52 +139,14 @@ DWORD Player::getInput(INPUT_RECORD ** eventBuffer)
     return numEventsRead;
 }
 
-void Player::handleInput()
+void Player::changeDirection(Direction direction)
 {
-    INPUT_RECORD* eventsBuffer;
-    int numberOfEvents = getInput(&eventsBuffer);
-
-    if (numberOfEvents > 0)
+    if (!oppositeDirections(moveDirection, direction))
     {
-        for (int i = 0; i < numberOfEvents; i++)
-        {
-            switch (eventsBuffer[i].EventType)
-            {
-            case KEY_EVENT:
-                if (eventsBuffer[i].Event.KeyEvent.bKeyDown)
-                {
-                    switch (eventsBuffer[i].Event.KeyEvent.wVirtualKeyCode)
-                    {
-                    case VK_UP:
-                        if (moveDirection != Direction::down)
-                        {
-                            moveDirection = Direction::up;
-                        }
-                        break;
-                    case VK_DOWN:
-                        if (moveDirection != Direction::up)
-                        {
-                            moveDirection = Direction::down;
-                        }
-                        break;
-                    case VK_LEFT:
-                        if (moveDirection != Direction::right)
-                        {
-                            moveDirection = Direction::left;
-                        }
-                        break;
-                    case VK_RIGHT:
-                        if (moveDirection != Direction::left)
-                        {
-                            moveDirection = Direction::right;
-                        }
-                        break;
-                    }
-                }
-            }
-        }
+        moveDirection = direction;
     }
 }
+    
 
 void Player::drawSnakeBody()
 {
@@ -199,5 +163,13 @@ void Player::eraiseTailIfMoved()
         Utils::PrintText(pointToEraise.x, pointToEraise.y, " ");
         needToEraise = false;
     }
+}
+
+bool Player::oppositeDirections(Direction direction_one, Direction direction_two)
+{
+    return (direction_one == up && direction_two == down) 
+        || (direction_one == down && direction_two == up) 
+        || (direction_one == left && direction_two == right) 
+        || (direction_one == right && direction_two == left);
 }
 

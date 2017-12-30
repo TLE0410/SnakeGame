@@ -20,8 +20,7 @@ namespace Utils
 
     Point2D static getNextPosition(const Point2D &point, const Direction &direction)
     {
-        Point2D resultPoint;
-        resultPoint = point;
+        Point2D resultPoint = point;
         switch (direction)
         {
             case up:

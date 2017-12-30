@@ -7,7 +7,7 @@
 class Fruit : public GameObject
 {
 public:
-    Fruit();
+    Fruit(const Renderer &renderingEngine);
     void render();
     void update();
     void handleInput() {};

@@ -1,9 +1,7 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include <vector>
-#include <chrono>
-#include <ctime>
+#include "Renderer.h"
 #include "Player.h"
 #include "Fruit.h"
 #include "Border.h"
@@ -21,6 +19,7 @@ public:
     void initialize();
     bool isGameOver();
 private:
+    Renderer *m_renderer_;
     Player *m_Player;
     Fruit *m_Fruit;
     Border *m_Border;

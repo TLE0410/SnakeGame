@@ -2,7 +2,7 @@
 #include "Utils.h"
 #include <string>
 
-Border::Border()
+Border::Border(const Renderer &renderer) : GameObject(renderer)
 {
     addTopHorizontalLine();
     addLeftVerticalLine();
@@ -12,12 +12,14 @@ Border::Border()
 
 void Border::render()
 {
-    std::string borderPixel;
-    borderPixel = (char)219;
-    for (Point2D* point : m_borderPoints)
-    {
-        Utils::PrintText(point->x, point->y, borderPixel);
-    }
+    //std::string borderPixel;
+    //borderPixel = (char)219;
+    //for (Point2D* point : m_borderPoints)
+    //{
+    //    Utils::PrintText(point->x, point->y, borderPixel);
+    //}
+    
+    renderer_->renderBox(0, 0, 0);
 }
 
 const std::vector<Point2D*> Border::getBorder() const

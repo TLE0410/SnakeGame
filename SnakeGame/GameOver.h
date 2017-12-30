@@ -6,10 +6,9 @@
 class GameOver : GameObject
 {
 public:
-    GameOver();
-    void render();
-    void update() {};
-    void handleInput() {};
+    GameOver(const Renderer &renderer);
+    void render() override;
+    void update() override {};
 private:
     bool m_needToRender;
 };

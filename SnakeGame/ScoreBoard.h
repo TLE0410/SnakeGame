@@ -6,7 +6,7 @@
 class ScoreBoard : GameObject
 {
 public:
-    ScoreBoard();
+    ScoreBoard(const Renderer &renderer);
     void increaseScore();
 
     void render();

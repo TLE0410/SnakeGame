@@ -7,16 +7,18 @@
 #include "Point2D.h"
 #include "GameObject.h"
 #include "Direction.h"
+#include "MovableObserver.h"
 
 using namespace std::chrono;
 
-class Player : public GameObject
+class Player : public GameObject, public MovableObserver
 {
 public:
-    Player();
-    void render();
-    void update();
-    void handleInput();
+    Player(const Renderer &renderingEngine);
+    void render() override;
+    void update() override;
+
+    void changeDirection(Direction direction) override;
 
     void die();
     int getHeadX();
@@ -37,6 +39,8 @@ private:
     bool needToIncreaseLength;
     void drawSnakeBody();
     void eraiseTailIfMoved();
+
+    bool oppositeDirections(Direction direction_one, Direction direction_two);
 };
 
 #endif

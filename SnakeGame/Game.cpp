@@ -1,13 +1,13 @@
 #include <stdlib.h>
 #include <chrono>
 #include <iostream>
-#include <stdlib.h>
 
 #include "Game.h"
 #include "Fruit.h"
 #include "Border.h"
 #include "Player.h"
 #include "Constants.h"
+#include "SDLRenderingEngine.h"
 
 void Game::update()
 {
@@ -30,7 +30,7 @@ void Game::update()
 
 void Game::handleInput()
 {
-    m_Player->handleInput();
+    m_renderer_->pollEvents();
 }
     
 void Game::render()
@@ -51,11 +51,16 @@ void Game::render()
 
 void Game::initialize()
 {
-    m_Fruit = new Fruit();
-    m_Border = new Border();
-    m_Player = new Player();
-    m_ScoreBoard = new ScoreBoard();
-    m_GameOver = new GameOver();
+    m_renderer_ = new SdlRenderingEngine();
+
+    m_Fruit = new Fruit(*m_renderer_);
+    m_Border = new Border(*m_renderer_);
+    m_Player = new Player(*m_renderer_);
+    m_renderer_->attachMovableObserver(*m_Player);
+
+    m_ScoreBoard = new ScoreBoard(*m_renderer_);
+    m_GameOver = new GameOver(*m_renderer_);
+
     m_collisionManger = new CollisionManager();
     m_GameTimer = new GameTimer();
     m_isGameOver = false;
