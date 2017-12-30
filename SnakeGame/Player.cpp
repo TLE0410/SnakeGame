@@ -17,8 +17,10 @@ Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Player::render()
 {
-    //drawSnakeBody();
-    //eraiseTailIfMoved();
+    for (Point2D* point : m_snakePositions)
+    {
+        renderer_->renderBox(point->x, point->y, 0);
+    }
 }
 
 void Player::update()
@@ -122,37 +124,11 @@ void Player::increaseLength()
     needToIncreaseLength = true;
 }
 
-DWORD Player::getInput(INPUT_RECORD ** eventBuffer)
-{
-    DWORD numEvents = 0;
-    DWORD numEventsRead = 0;
-
-    HANDLE rHnd = GetStdHandle(STD_INPUT_HANDLE);
-    GetNumberOfConsoleInputEvents(rHnd, &numEvents);
-
-    if (numEvents)
-    {
-        *eventBuffer = (INPUT_RECORD *)malloc(sizeof(INPUT_RECORD) * numEvents);
-        ReadConsoleInput(rHnd, *eventBuffer, numEvents, &numEventsRead);
-    }
-
-    return numEventsRead;
-}
-
 void Player::changeDirection(Direction direction)
 {
     if (!oppositeDirections(moveDirection, direction))
     {
         moveDirection = direction;
-    }
-}
-    
-
-void Player::drawSnakeBody()
-{
-    for (Point2D* point : m_snakePositions)
-    {
-        Utils::PrintText(point->x, point->y, "o");
     }
 }
 

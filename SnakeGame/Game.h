@@ -9,8 +9,9 @@
 #include "GameTimer.h"
 #include "ScoreBoard.h"
 #include "GameOver.h"
+#include "CloseEventHandler.h"
 
-class Game
+class Game : public CloseEventHandler
 {
 public:
     void handleInput();
@@ -18,6 +19,8 @@ public:
     void render();
     void initialize();
     bool isGameOver();
+    bool running();
+    void handleCloseEvent() override;
 private:
     Renderer *m_renderer_;
     Player *m_Player;
@@ -29,6 +32,7 @@ private:
     CollisionManager *m_collisionManger;
     GameTimer *m_GameTimer;
     int m_Score;
+    bool isGameActive;
 
     void printGameOver();
 };

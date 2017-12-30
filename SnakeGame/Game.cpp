@@ -35,23 +35,23 @@ void Game::handleInput()
     
 void Game::render()
 {
-    if (m_GameTimer->timeToRender())
-    {
-        m_Border->render();
-        m_Fruit->render();
-        m_Player->render();
-        m_ScoreBoard->render();
-    }
+    m_renderer_->clearScreen();
+    m_Border->render();
+    m_Fruit->render();
+    m_Player->render();
+    m_ScoreBoard->render();
 
     if (m_isGameOver)
     {
         m_GameOver->render();
     }
+    m_renderer_->renderScreen();
 }
 
 void Game::initialize()
 {
     m_renderer_ = new SdlRenderingEngine();
+    m_renderer_->addCloseEventHandler(*this);
 
     m_Fruit = new Fruit(*m_renderer_);
     m_Border = new Border(*m_renderer_);
@@ -64,12 +64,24 @@ void Game::initialize()
     m_collisionManger = new CollisionManager();
     m_GameTimer = new GameTimer();
     m_isGameOver = false;
+
+    isGameActive = true;
 }
 
 
 bool Game::isGameOver()
 {
     return m_isGameOver;
+}
+
+bool Game::running()
+{
+    return isGameActive;
+}
+
+void Game::handleCloseEvent()
+{
+    isGameActive = false;
 }
 
 void Game::printGameOver()

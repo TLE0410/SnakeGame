@@ -3,40 +3,23 @@
 #include <SDL.h>
 #include "Constants.h"
 
+SdlRenderingEngine::SdlRenderingEngine()
+{
+    InitializeSDL();
+}
+
 void SdlRenderingEngine::renderBox(int x, int y, int color) const
 {
-    //Clear screen
+    int boxWidth = Constants::SCREEN_WIDTH / Constants::GAME_FIELD_WIDTH;
+    int boxHeight = Constants::SCREEN_HEIGHT / Constants::GAME_FIELD_HEIGHT;
 
-    //Clear screen
-    SDL_SetRenderDrawColor(sdl_renderer_, 0xFF, 0xFF, 0xFF, 0xFF);
-    SDL_RenderClear(sdl_renderer_);
+    int boxX = (x - 1) * boxWidth;
+    int boxY = (y - 1) * boxHeight;
 
-    //Render red filled quad
-    int width = Constants::SCREEN_WIDTH;
-    int height = Constants::SCREEN_HEIGHT;
-    SDL_Rect fillRect = { width / 4, height / 4, width / 2, height / 2 };
+    SDL_Rect fillRect = { boxX, boxY, boxWidth, boxHeight };
 
     SDL_SetRenderDrawColor(sdl_renderer_, 0xFF, 0x00, 0x00, 0xFF);
     SDL_RenderFillRect(sdl_renderer_, &fillRect);
-
-    //Render green outlined quad
-    SDL_Rect outlineRect = { width / 6, height / 6, width * 2 / 3, height * 2 / 3 };
-    SDL_SetRenderDrawColor(sdl_renderer_, 0x00, 0xFF, 0x00, 0xFF);
-    SDL_RenderDrawRect(sdl_renderer_, &outlineRect);
-
-    //Draw blue horizontal line
-    SDL_SetRenderDrawColor(sdl_renderer_, 0x00, 0x00, 0xFF, 0xFF);
-    SDL_RenderDrawLine(sdl_renderer_, 0, height / 2, width, height / 2);
-
-    //Draw vertical line of yellow dots
-    SDL_SetRenderDrawColor(sdl_renderer_, 0xFF, 0xFF, 0x00, 0xFF);
-    for (int i = 0; i < height; i += 4)
-    {
-        SDL_RenderDrawPoint(sdl_renderer_, width / 2, i);
-    }
-
-    //Update screen
-    SDL_RenderPresent(sdl_renderer_);
 }
 
 void SdlRenderingEngine::pollEvents()
@@ -47,8 +30,11 @@ void SdlRenderingEngine::pollEvents()
         //User requests quit
         if (e.type == SDL_QUIT)
         {
-            // handle quit event
-            // quit = true;
+            close_event_handler_->handleCloseEvent();
+        }
+        else if (e.type == SDL_KEYDOWN)
+        {
+            processKeyCode(e);
         }
     }
 }
@@ -56,6 +42,30 @@ void SdlRenderingEngine::pollEvents()
 void SdlRenderingEngine::attachMovableObserver(MovableObserver& movableObserver)
 {
     movable_observers_.push_back(&movableObserver);
+}
+
+void SdlRenderingEngine::addCloseEventHandler(CloseEventHandler& closeEventHandler)
+{
+    close_event_handler_ = &closeEventHandler;
+}
+
+void SdlRenderingEngine::clearScreen()
+{
+    SDL_SetRenderDrawColor(sdl_renderer_, 0xFF, 0xFF, 0xFF, 0xFF);
+    SDL_RenderClear(sdl_renderer_);
+}
+
+void SdlRenderingEngine::renderScreen()
+{
+    SDL_RenderPresent(sdl_renderer_);
+}
+
+void SdlRenderingEngine::executeChangeDirection(Direction direction)
+{
+    for (MovableObserver* observer : movable_observers_)
+    {
+        observer->changeDirection(direction);
+    }
 }
 
 void SdlRenderingEngine::InitializeSDL()
@@ -88,9 +98,23 @@ void SdlRenderingEngine::InitializeSDL()
     }
 }
 
-SdlRenderingEngine::SdlRenderingEngine()
+void SdlRenderingEngine::processKeyCode(SDL_Event e)
 {
-    InitializeSDL();
+    switch (e.key.keysym.sym)
+    {
+        case SDLK_UP:
+            executeChangeDirection(up);
+            break;
+        case SDLK_DOWN:
+            executeChangeDirection(down);
+            break;
+        case SDLK_LEFT:
+            executeChangeDirection(left);
+            break;
+        case SDLK_RIGHT:
+            executeChangeDirection(right);
+            break;
+    }
 }
 
 SdlRenderingEngine::~SdlRenderingEngine()

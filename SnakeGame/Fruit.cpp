@@ -10,9 +10,7 @@ Fruit::Fruit(const Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Fruit::render()
 {
-    //std::string fruitCharacter;
-    //fruitCharacter = "F";
-    //Utils::PrintText(m_position.x, m_position.y, fruitCharacter);
+    renderer_->renderBox(m_position.x, m_position.y, 0);
 }
 
 void Fruit::update()
