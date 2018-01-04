@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 2.8.9)
 project(snakegame)
 
+set (CMAKE_CXX_STANDARD 11)
+
 # includes cmake/FindSDL2.cmake
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/SnakeGame/cmake)
 
