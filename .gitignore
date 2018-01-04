@@ -10,3 +10,6 @@ SnakeGame/Release/
 *.suo
 *.zip
 ~*.xlsx
+
+#MacOS files
+.DS_Store
