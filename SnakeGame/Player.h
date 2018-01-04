@@ -1,7 +1,6 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include <windows.h>
 #include <vector>
 #include <chrono>
 #include "Point2D.h"
@@ -30,7 +29,7 @@ public:
 
 private:
     std::vector<Point2D*> m_snakePositions;
-    DWORD getInput(INPUT_RECORD **eventBuffer);
+
     Direction moveDirection;
 
     bool isAlive;
