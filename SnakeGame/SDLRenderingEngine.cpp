@@ -88,7 +88,8 @@ void SdlRenderingEngine::InitializeSDL()
     }
 
     screen_surface_ = SDL_GetWindowSurface(window_);
-    sdl_renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
+    sdl_renderer_ = SDL_GetRenderer(window_);
+    
 
     if (sdl_renderer_ == nullptr)
     {
