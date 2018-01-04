@@ -2,6 +2,7 @@
 #include "SDLRenderingEngine.h"
 #include <SDL.h>
 #include "Constants.h"
+#include "CrossPlatformUtils.h"
 
 SdlRenderingEngine::SdlRenderingEngine()
 {
@@ -88,8 +89,7 @@ void SdlRenderingEngine::InitializeSDL()
     }
 
     screen_surface_ = SDL_GetWindowSurface(window_);
-    sdl_renderer_ = SDL_GetRenderer(window_);
-    
+    sdl_renderer_ = CrossPlatform::getRenderer(window_);
 
     if (sdl_renderer_ == nullptr)
     {
