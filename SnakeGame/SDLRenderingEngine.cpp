@@ -23,6 +23,10 @@ void SdlRenderingEngine::renderBox(int x, int y, int color) const
     SDL_RenderFillRect(sdl_renderer_, &fillRect);
 }
 
+void SdlRenderingEngine::renderBox(int x, int y, int width, int height, int color) const
+{
+}
+
 void SdlRenderingEngine::pollEvents()
 {
     SDL_Event e;

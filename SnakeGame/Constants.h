@@ -14,6 +14,10 @@ namespace Constants
     // screen parameters
     static const int SCREEN_WIDTH = 400;
     static const int SCREEN_HEIGHT = 400;
+
+    static const int SNAKE_BODY_WIDTH = 15;
+    static const int SNAKE_HEAD_WIDTH = 19;
+    static const int APPLE_RADIUS = 10;
 }
 
 #endif

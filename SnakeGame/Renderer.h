@@ -14,6 +14,7 @@ public:
     virtual void clearScreen() = 0;
     virtual void renderScreen() = 0;
     virtual void renderBox(int x, int y, int color) const = 0;
+    virtual void renderBox(int x, int y, int width, int height, int color) const = 0;
 };
 
 #endif // RENDERINGENGINE_H
