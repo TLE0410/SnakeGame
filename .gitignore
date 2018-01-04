@@ -13,3 +13,5 @@ SnakeGame/Release/
 
 #MacOS files
 .DS_Store
+/build_xcode/
+/build_unix/
