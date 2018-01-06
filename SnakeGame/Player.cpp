@@ -18,7 +18,7 @@ void Player::render()
 {
     for (Point2D* point : m_snakePositions)
     {
-        renderer_->renderBox(point->x, point->y, 0);
+        renderer_.renderBox(point->x, point->y, 0);
     }
 }
 

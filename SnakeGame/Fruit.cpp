@@ -10,7 +10,7 @@ Fruit::Fruit(const Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Fruit::render()
 {
-    renderer_->renderBox(m_position.x, m_position.y, 0);
+    renderer_.renderBox(m_position.x, m_position.y, 0);
 }
 
 void Fruit::update()

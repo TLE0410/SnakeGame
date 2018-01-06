@@ -14,7 +14,7 @@ void Border::render()
 {
     for (Point2D* point : m_borderPoints)
     {
-        renderer_->renderBox(point->x, point->y, 0);
+        renderer_.renderBox(point->x, point->y, 0);
     }
 }
 
