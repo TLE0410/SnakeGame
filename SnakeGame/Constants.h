@@ -1,8 +1,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-#include <string>
-
 namespace Constants
 {
     static const int GAME_FIELD_WIDTH = 10;

@@ -15,17 +15,14 @@ bool PositionGenerator::newPositionCollidesWithSnake(Point2D newPosition) const
     return  false;
 }
 
-Point2D PositionGenerator::generateNewPosition()
+Point2D PositionGenerator::generateNewPosition() const
 {
-    bool positionOccupied = false;
     Point2D newPosition;
 
     while (true)
     {
-        newPosition.x = rand() % (Constants::GAME_FIELD_WIDTH - 2) + 2;
-        newPosition.y = rand() % (Constants::GAME_FIELD_HEIGHT - 2) + 2;
-
-        Utils::Log(std::to_string(newPosition.x) + " " + std::to_string(newPosition.y));
+        newPosition.x = rand() % Constants::GAME_FIELD_WIDTH + 1;
+        newPosition.y = rand() % Constants::GAME_FIELD_HEIGHT +1;
 
         if (!newPositionCollidesWithSnake(newPosition))
         {

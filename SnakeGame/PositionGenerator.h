@@ -13,7 +13,7 @@ public:
     PositionGenerator(const Player& player) : player_(player) {}
 
     bool newPositionCollidesWithSnake(Point2D newPosition) const;
-    Point2D generateNewPosition();
+    Point2D generateNewPosition() const;
 private:
     const Player &player_;
 };

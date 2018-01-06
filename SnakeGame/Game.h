@@ -20,7 +20,7 @@ public:
     Game();
     void handleInput() const;
     void update();
-    void render();
+    void render() const;
     bool isGameOver() const;
     bool running() const;
     void handleCloseEvent() override;
@@ -35,7 +35,6 @@ private:
     unique_ptr<PositionGenerator> positionGenerator_;
 
     unique_ptr<GameTimer> gameTimer_;
-    int score_;
 
     bool isGameActive = true;
     bool m_isGameOver = false;

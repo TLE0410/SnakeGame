@@ -1,23 +1,16 @@
-#include <stdlib.h>
-#include <chrono>
-#include <iostream>
-
 #include "Game.h"
 #include "Fruit.h"
 #include "Border.h"
 #include "Player.h"
-#include "Constants.h"
 #include "SDLRenderingEngine.h"
 
-using std::unique_ptr;
 using std::make_unique;
 
 void Game::update()
 {
     if (gameTimer_->timeToMovePlayer())
     {
-        if (collisionManger_->checkPlayerAndBorderCollision(*player_, *border_)
-            || collisionManger_->checkPlayerAndBorderCollision(*player_, *border_))
+        if (collisionManger_->checkPlayerAndBorderCollision(*player_, *border_))
         {
             m_isGameOver = true;
         }
@@ -61,7 +54,7 @@ void Game::handleInput() const
     renderer_->pollEvents();
 }
     
-void Game::render()
+void Game::render() const
 {
     renderer_->clearScreen();
     border_->render();

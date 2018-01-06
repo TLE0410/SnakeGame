@@ -1,5 +1,4 @@
 #include "GameOver.h"
-#include "Utils.h"
 
 GameOver::GameOver(const Renderer& renderer) : GameObject(renderer)
 {

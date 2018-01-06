@@ -19,7 +19,7 @@ void Fruit::update()
 {
 }
 
-Point2D Fruit::getPosition()
+Point2D Fruit::getPosition() const
 {
     return position_;
 }

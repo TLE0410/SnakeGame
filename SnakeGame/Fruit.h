@@ -12,7 +12,7 @@ public:
     void render() override;
     void update() override;
 
-    Point2D getPosition();
+    Point2D getPosition() const;
     void generateNewPosition();
 
 private:

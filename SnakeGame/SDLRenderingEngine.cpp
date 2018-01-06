@@ -11,11 +11,11 @@ SdlRenderingEngine::SdlRenderingEngine()
 
 void SdlRenderingEngine::renderBox(int x, int y, Color color) const
 {
-    int boxWidth = Constants::SCREEN_WIDTH / Constants::GAME_FIELD_WIDTH;
-    int boxHeight = Constants::SCREEN_HEIGHT / Constants::GAME_FIELD_HEIGHT;
+    const int boxWidth = Constants::SCREEN_WIDTH / Constants::GAME_FIELD_WIDTH;
+    const int boxHeight = Constants::SCREEN_HEIGHT / Constants::GAME_FIELD_HEIGHT;
 
-    int boxX = (x - 1) * boxWidth;
-    int boxY = (y - 1) * boxHeight;
+    const int boxX = (x - 1) * boxWidth;
+    const int boxY = (y - 1) * boxHeight;
 
     SDL_Rect fillRect = { boxX, boxY, boxWidth, boxHeight };
 

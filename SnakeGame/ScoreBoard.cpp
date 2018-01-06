@@ -1,6 +1,4 @@
 #include "ScoreBoard.h"
-#include "Utils.h"
-#include "Constants.h"
 
 ScoreBoard::ScoreBoard(const Renderer &renderer) : GameObject(renderer)
 {

@@ -21,8 +21,6 @@ private:
     void addLeftVerticalLine();
     void addRightVerticalLine();
     void addBottomHorizontalLine();
-
-    Color color;
 };
 
 
