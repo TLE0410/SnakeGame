@@ -37,6 +37,7 @@ private:
     bool needToIncreaseLength;
 
     bool oppositeDirections(Direction direction_one, Direction direction_two);
+    void moveSnakeHead(Point2D* const snakeHead, Direction direction);
 };
 
 #endif

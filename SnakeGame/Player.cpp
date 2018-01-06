@@ -35,28 +35,14 @@ void Player::update()
         return;
     }
 
-    Point2D newPosition{};
-    Point2D oldPosition{};
+    Point2D newPosition;
     const auto snakeHead = m_snakePositions.front();
     newPosition.x = snakeHead->x;
     newPosition.y = snakeHead->y;
 
-    switch (moveDirection)
-    {
-    case up:
-        (snakeHead->y)--;
-        break;
-    case down:
-        (snakeHead->y)++;
-        break;
-    case left:
-        (snakeHead->x)--;
-        break;
-    case right:
-        (snakeHead->x)++;
-        break;
-    }
+    moveSnakeHead(snakeHead, moveDirection);
 
+    Point2D oldPosition;
     if (m_snakePositions.size() > 1)
     {
         std::vector<Point2D*>::iterator mIter = m_snakePositions.begin();
@@ -82,12 +68,6 @@ void Player::update()
         m_snakePositions.push_back(newPoint);
         needToIncreaseLength = false;
     }
-    //else
-    //{
-    //    pointToEraise.x = newPosition.x;
-    //    pointToEraise.y = newPosition.y;
-    //    needToEraise = true;
-    //}
 }
 
 void Player::die()
@@ -137,4 +117,23 @@ bool Player::oppositeDirections(Direction direction_one, Direction direction_two
         || (direction_one == down && direction_two == up) 
         || (direction_one == left && direction_two == right) 
         || (direction_one == right && direction_two == left);
+}
+
+void Player::moveSnakeHead(Point2D* const snakeHead, Direction direction)
+{
+    switch (direction)
+    {
+        case up:
+            (snakeHead->y)--;
+            break;
+        case down:
+            (snakeHead->y)++;
+            break;
+        case left:
+            (snakeHead->x)--;
+            break;
+        case right:
+            (snakeHead->x)++;
+            break;
+    }
 }
