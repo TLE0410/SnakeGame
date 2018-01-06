@@ -1,16 +1,16 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "Renderer.h"
-#include "Player.h"
-#include "Fruit.h"
+#include <memory>
 #include "Border.h"
 #include "CollisionManager.h"
-#include "GameTimer.h"
-#include "ScoreBoard.h"
-#include "GameOver.h"
 #include "CloseEventHandler.h"
-#include <memory>
+#include "Fruit.h"
+#include "GameOver.h"
+#include "GameTimer.h"
+#include "Player.h"
+#include "Renderer.h"
+#include "ScoreBoard.h"
 
 using std::unique_ptr;
 

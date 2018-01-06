@@ -12,7 +12,6 @@ public:
     SdlRenderingEngine();
     ~SdlRenderingEngine();
     void renderBox(int x, int y, Color color) const override;
-    void renderBox(int x, int y, int width, int height, int color) const override;
     void pollEvents() override;
     void attachMovableObserver(MovableObserver &movableObserver) override;
     void addCloseEventHandler(CloseEventHandler& closeEventHandler) override;
