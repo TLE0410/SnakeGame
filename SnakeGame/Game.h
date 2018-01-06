@@ -10,29 +10,34 @@
 #include "ScoreBoard.h"
 #include "GameOver.h"
 #include "CloseEventHandler.h"
+#include <memory>
+
+using std::unique_ptr;
 
 class Game : public CloseEventHandler
 {
 public:
-    void handleInput();
+    Game();
+    void handleInput() const;
     void update();
     void render();
-    void initialize();
-    bool isGameOver();
-    bool running();
+    bool isGameOver() const;
+    bool running() const;
     void handleCloseEvent() override;
 private:
-    Renderer *m_renderer_;
-    Player *m_Player;
-    Fruit *m_Fruit;
-    Border *m_Border;
-    ScoreBoard *m_ScoreBoard;
-    GameOver *m_GameOver;
-    bool m_isGameOver;
-    CollisionManager *m_collisionManger;
-    GameTimer *m_GameTimer;
+    unique_ptr<Renderer> m_Renderer_;
+    unique_ptr<Player> m_Player;
+    unique_ptr<Fruit> m_Fruit;
+    unique_ptr<Border> m_Border;
+    unique_ptr<ScoreBoard> m_ScoreBoard;
+    unique_ptr<GameOver> m_GameOver;
+    unique_ptr<CollisionManager> m_CollisionManger;
+
+    unique_ptr<GameTimer> m_GameTimer;
     int m_Score;
-    bool isGameActive;
+
+    bool isGameActive = true;
+    bool m_isGameOver = false;
 
     void printGameOver();
 };

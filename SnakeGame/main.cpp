@@ -1,11 +1,9 @@
-#include <stdio.h>
 #include "Game.h"
 
 int main()
 {
-    Game* game = new Game();
-    game->initialize();
-
+    std::unique_ptr<Game> game = std::make_unique<Game>();
+    
     while(game->running())
     {
         game->handleInput();
