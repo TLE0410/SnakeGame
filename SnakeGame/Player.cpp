@@ -20,7 +20,7 @@ Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Player::render()
 {
-    const Color greenColor(0, 255, 0, 0);
+    const Color greenColor(0, 255, 0, 200);
     for (Point2D* point : m_snakePositions)
     {
         renderer_.renderBox(point->x, point->y, greenColor);
@@ -106,6 +106,21 @@ Direction Player::getDirection()
 void Player::increaseLength()
 {
     needToIncreaseLength = true;
+}
+
+Player::const_iterator Player::body_begins() const
+{
+    return m_snakePositions.begin();
+}
+
+Player::const_iterator Player::body_ends() const
+{
+    return m_snakePositions.end();
+}
+
+void Player::removeBodyStartingWith(const std::vector<Point2D*>::const_iterator positionToRemoveFrom)
+{
+    m_snakePositions.erase(positionToRemoveFrom, m_snakePositions.end());
 }
 
 void Player::changeDirection(Direction direction)

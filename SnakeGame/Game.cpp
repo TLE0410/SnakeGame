@@ -27,6 +27,11 @@ void Game::update()
             m_ScoreBoard->increaseScore();
         }
 
+        if (m_CollisionManger->checkPlayerCollideItself(*m_Player))
+        {
+            //m_ScoreBoard->updateScore()
+        }
+
         m_Player->update();
     }
 }

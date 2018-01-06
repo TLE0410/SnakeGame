@@ -10,7 +10,7 @@ Fruit::Fruit(const Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Fruit::render()
 {
-    const Color greenColor(255, 0, 0, 0);
+    const Color greenColor(255, 0, 0, 200);
     renderer_.renderBox(m_position.x, m_position.y, greenColor);
 }
 

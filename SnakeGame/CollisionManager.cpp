@@ -31,5 +31,16 @@ bool CollisionManager::checkPlayerAndBorderCollision(Player & player, const Bord
 
 bool CollisionManager::checkPlayerCollideItself(Player & player)
 {
+    const Point2D headNextPosition = 
+        Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
+
+    for (auto point = player.body_begins(); point != player.body_ends(); ++point)
+    {
+        if ((*point)->equals(headNextPosition))
+        {
+            player.removeBodyStartingWith(std::next(point));
+            return true;
+        }
+    }
     return false;
 }

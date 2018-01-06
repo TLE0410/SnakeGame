@@ -2,13 +2,10 @@
 #define PLAYER_H
 
 #include <vector>
-#include <chrono>
 #include "Point2D.h"
 #include "GameObject.h"
 #include "Direction.h"
 #include "MovableObserver.h"
-
-using namespace std::chrono;
 
 class Player : public GameObject, public MovableObserver
 {
@@ -24,8 +21,12 @@ public:
     int getHeadY();
     Point2D getHeadPosition();
     Direction getDirection();
-
     void increaseLength();
+
+    typedef std::vector<Point2D*>::const_iterator const_iterator;
+    const_iterator body_begins() const;
+    const_iterator body_ends() const;
+    void removeBodyStartingWith(const const_iterator positionToRemoveFrom);
 
 private:
     std::vector<Point2D*> m_snakePositions;

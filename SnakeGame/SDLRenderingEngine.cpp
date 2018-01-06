@@ -19,6 +19,7 @@ void SdlRenderingEngine::renderBox(int x, int y, Color color) const
 
     SDL_Rect fillRect = { boxX, boxY, boxWidth, boxHeight };
 
+    SDL_SetRenderDrawBlendMode(sdl_renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(sdl_renderer_, color.red, color.green, color.blue, color.alpha);
     SDL_RenderFillRect(sdl_renderer_, &fillRect);
 }
