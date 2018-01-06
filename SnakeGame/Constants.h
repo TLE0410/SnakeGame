@@ -5,11 +5,10 @@
 
 namespace Constants
 {
-    static const int GAME_FIELD_WIDTH = 20;
-    static const int GAME_FIELD_HEIGHT = 20;
+    static const int GAME_FIELD_WIDTH = 10;
+    static const int GAME_FIELD_HEIGHT = 10;
 
-    // milliseconds
-    static const int SNAKE_MOVE_RATE = 300;
+    static const int SNAKE_MOVE_RATE = 300; // in millisecods
 
     // screen parameters
     static const int SCREEN_WIDTH = 400;
@@ -18,6 +17,8 @@ namespace Constants
     static const int SNAKE_BODY_WIDTH = 15;
     static const int SNAKE_HEAD_WIDTH = 19;
     static const int APPLE_RADIUS = 10;
+
+    static const char *GAME_WINDOW_TITLE = "Snake Game";
 }
 
 #endif

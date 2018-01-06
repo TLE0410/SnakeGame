@@ -8,9 +8,8 @@ class Fruit : public GameObject
 {
 public:
     Fruit(const Renderer &renderingEngine);
-    void render();
-    void update();
-    void handleInput() {};
+    void render() override;
+    void update() override;
 
     int getX();
     int getY();

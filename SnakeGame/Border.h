@@ -9,9 +9,8 @@ class Border : public GameObject
 {
 public:
     Border(const Renderer &renderer);
-    void render();
-    void update() {};
-    void handleInput() {};
+    void render() override;
+    void update() override{};
 
     const std::vector<Point2D*> getBorder() const;
 
@@ -22,6 +21,8 @@ private:
     void addLeftVerticalLine();
     void addRightVerticalLine();
     void addBottomHorizontalLine();
+
+    Color color;
 };
 
 

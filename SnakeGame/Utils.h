@@ -2,20 +2,15 @@
 #define UTILS_H
 
 #include <string>
-#include "Constants.h"
+#include <iostream>
 #include "Direction.h"
 #include "Point2D.h"
 
 namespace Utils
 {
-    void static PrintText(int horizontalPosition, int verticalPosition, std::string text)
-    {
-        printf("\033[%d;%dH%s", verticalPosition + 1, horizontalPosition + 5, text.c_str());
-    }
-
     void static Log(std::string messageToLog)
     {
-        PrintText(Constants::GAME_FIELD_WIDTH + 5, 1, messageToLog.c_str());
+        std::cout << messageToLog << std::endl;
     }
 
     Point2D static getNextPosition(const Point2D &point, const Direction &direction)

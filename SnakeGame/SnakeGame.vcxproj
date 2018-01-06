@@ -140,6 +140,7 @@
     <ClInclude Include="Border.h" />
     <ClInclude Include="CloseEventHandler.h" />
     <ClInclude Include="CollisionManager.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Constants.h" />
     <ClInclude Include="CrossPlatformUtils.h" />
     <ClInclude Include="Direction.h" />

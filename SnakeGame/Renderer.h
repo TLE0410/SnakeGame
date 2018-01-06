@@ -3,6 +3,7 @@
 
 #include "MovableObserver.h"
 #include "CloseEventHandler.h"
+#include "Color.h"
 
 class Renderer
 {
@@ -13,7 +14,7 @@ public:
     virtual void attachMovableObserver(MovableObserver &movableObserver) = 0;
     virtual void clearScreen() = 0;
     virtual void renderScreen() = 0;
-    virtual void renderBox(int x, int y, int color) const = 0;
+    virtual void renderBox(int x, int y, Color color) const = 0;
     virtual void renderBox(int x, int y, int width, int height, int color) const = 0;
 };
 

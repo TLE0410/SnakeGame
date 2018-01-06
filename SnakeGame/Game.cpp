@@ -9,7 +9,6 @@
 #include "Constants.h"
 #include "SDLRenderingEngine.h"
 
-using std::unique_ptr;
 using std::make_unique;
 
 void Game::update()
@@ -56,7 +55,6 @@ void Game::handleInput() const
 void Game::render()
 {
     m_Renderer_->clearScreen();
-    m_Border->render();
     m_Fruit->render();
     m_Player->render();
     m_ScoreBoard->render();

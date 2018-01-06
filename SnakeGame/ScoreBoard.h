@@ -9,9 +9,8 @@ public:
     ScoreBoard(const Renderer &renderer);
     void increaseScore();
 
-    void render();
-    void update() {};
-    void handleInput() {};
+    void render() override;
+    void update() override {};
 
 private:
     int m_Score;

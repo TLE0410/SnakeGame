@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include <string>
 #include "Fruit.h"
 #include "Utils.h"
-#include <string>
+#include "Constants.h"
 
 Fruit::Fruit(const Renderer &renderingEngine) : GameObject(renderingEngine)
 {
@@ -10,7 +10,8 @@ Fruit::Fruit(const Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Fruit::render()
 {
-    renderer_.renderBox(m_position.x, m_position.y, 0);
+    const Color greenColor(255, 0, 0, 0);
+    renderer_.renderBox(m_position.x, m_position.y, greenColor);
 }
 
 void Fruit::update()

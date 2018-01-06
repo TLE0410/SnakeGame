@@ -1,6 +1,7 @@
+#include <string>
 #include "Border.h"
 #include "Utils.h"
-#include <string>
+#include  "Constants.h"
 
 Border::Border(const Renderer &renderer) : GameObject(renderer)
 {
@@ -12,9 +13,10 @@ Border::Border(const Renderer &renderer) : GameObject(renderer)
 
 void Border::render()
 {
+    Color darkBlue(0, 102, 153, 0);
     for (Point2D* point : m_borderPoints)
     {
-        renderer_.renderBox(point->x, point->y, 0);
+        renderer_.renderBox(point->x, point->y, darkBlue);
     }
 }
 

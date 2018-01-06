@@ -1,14 +1,18 @@
 #include <iterator>
 #include "Player.h"
 #include "Utils.h"
+#include "Constants.h"
 
 Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
 {
-    moveDirection = Direction::none;
+    moveDirection = Direction::up;
     Point2D* startPosition = new Point2D;
     startPosition->x = Constants::GAME_FIELD_WIDTH / 2;
     startPosition->y = Constants::GAME_FIELD_HEIGHT / 2;
     m_snakePositions.push_back(startPosition);
+
+    m_snakePositions.push_back(new Point2D(startPosition->x, startPosition->y + 1));
+    m_snakePositions.push_back(new Point2D(startPosition->x, startPosition->y + 2));
 
     needToIncreaseLength = false;
     isAlive = true;
@@ -16,9 +20,10 @@ Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Player::render()
 {
+    const Color greenColor(0, 255, 0, 0);
     for (Point2D* point : m_snakePositions)
     {
-        renderer_.renderBox(point->x, point->y, 0);
+        renderer_.renderBox(point->x, point->y, greenColor);
     }
 }
 
