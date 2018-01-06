@@ -133,7 +133,6 @@
     <ClCompile Include="GameTimer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PositionGenerator.cpp" />
     <ClCompile Include="SDLRenderingEngine.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
   </ItemGroup>
@@ -153,7 +152,6 @@
     <ClInclude Include="MovableObserver.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Point2D.h" />
-    <ClInclude Include="PositionGenerator.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SDLRenderingEngine.h" />
     <ClInclude Include="resource.h" />

@@ -25,17 +25,16 @@ public:
     bool running() const;
     void handleCloseEvent() override;
 private:
-    unique_ptr<Renderer> renderer_;
-    unique_ptr<Player> player_;
-    unique_ptr<Fruit> fruit_;
-    unique_ptr<Border> border_;
-    unique_ptr<ScoreBoard> scoreBoard_;
-    unique_ptr<GameOver> gameOver_;
-    unique_ptr<CollisionManager> collisionManger_;
-    unique_ptr<PositionGenerator> positionGenerator_;
+    unique_ptr<Renderer> m_Renderer_;
+    unique_ptr<Player> m_Player;
+    unique_ptr<Fruit> m_Fruit;
+    unique_ptr<Border> m_Border;
+    unique_ptr<ScoreBoard> m_ScoreBoard;
+    unique_ptr<GameOver> m_GameOver;
+    unique_ptr<CollisionManager> m_CollisionManger;
 
-    unique_ptr<GameTimer> gameTimer_;
-    int score_;
+    unique_ptr<GameTimer> m_GameTimer;
+    int m_Score;
 
     bool isGameActive = true;
     bool m_isGameOver = false;

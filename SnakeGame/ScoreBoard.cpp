@@ -18,7 +18,7 @@ void ScoreBoard::render()
 {
     if (m_NeedToRenderScore)
     {
-        //std::string scoreToPrint = "Score: " + std::to_string(score_);
+        //std::string scoreToPrint = "Score: " + std::to_string(m_Score);
         //Utils::PrintText(2, Constants::GAME_FIELD_HEIGHT + 2, scoreToPrint);
         //m_NeedToRenderScore = false;
     }
