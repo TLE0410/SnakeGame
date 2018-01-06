@@ -33,11 +33,8 @@ private:
     Direction moveDirection;
 
     bool isAlive;
-    bool needToEraise;
     Point2D pointToEraise;
     bool needToIncreaseLength;
-    void drawSnakeBody();
-    void eraiseTailIfMoved();
 
     bool oppositeDirections(Direction direction_one, Direction direction_two);
 };

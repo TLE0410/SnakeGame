@@ -10,7 +10,6 @@ Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
     startPosition->y = Constants::GAME_FIELD_HEIGHT / 2;
     m_snakePositions.push_back(startPosition);
 
-    needToEraise = false;
     needToIncreaseLength = false;
     isAlive = true;
 }
@@ -83,12 +82,12 @@ void Player::update()
         m_snakePositions.push_back(newPoint);
         needToIncreaseLength = false;
     }
-    else
-    {
-        pointToEraise.x = newPosition.x;
-        pointToEraise.y = newPosition.y;
-        needToEraise = true;
-    }
+    //else
+    //{
+    //    pointToEraise.x = newPosition.x;
+    //    pointToEraise.y = newPosition.y;
+    //    needToEraise = true;
+    //}
 }
 
 void Player::die()
@@ -132,15 +131,6 @@ void Player::changeDirection(Direction direction)
     }
 }
 
-void Player::eraiseTailIfMoved()
-{
-    if (needToEraise)
-    {
-        Utils::PrintText(pointToEraise.x, pointToEraise.y, " ");
-        needToEraise = false;
-    }
-}
-
 bool Player::oppositeDirections(Direction direction_one, Direction direction_two)
 {
     return (direction_one == up && direction_two == down) 
@@ -148,4 +138,3 @@ bool Player::oppositeDirections(Direction direction_one, Direction direction_two
         || (direction_one == left && direction_two == right) 
         || (direction_one == right && direction_two == left);
 }
-
