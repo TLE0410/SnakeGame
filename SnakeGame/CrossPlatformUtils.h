@@ -1,5 +1,6 @@
 #ifndef CROSSPLATFORMUTILS_H
 #define CROSSPLATFORMUTILS_H
+
 #include "SDL.h"
 
 namespace CrossPlatform

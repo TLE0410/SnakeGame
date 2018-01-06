@@ -14,63 +14,66 @@ using std::make_unique;
 
 void Game::update()
 {
-    if (m_GameTimer->timeToMovePlayer())
+    if (gameTimer_->timeToMovePlayer())
     {
-        if (m_CollisionManger->checkPlayerAndBorderCollision(*m_Player, *m_Border)
-            || m_CollisionManger->checkPlayerAndBorderCollision(*m_Player, *m_Border))
+        if (collisionManger_->checkPlayerAndBorderCollision(*player_, *border_)
+            || collisionManger_->checkPlayerAndBorderCollision(*player_, *border_))
         {
             m_isGameOver = true;
         }
 
-        if (m_CollisionManger->checkPlayerAndFruitCollision(*m_Player, *m_Fruit))
+        if (collisionManger_->checkPlayerAndFruitCollision(*player_, *fruit_))
         {
-            m_ScoreBoard->increaseScore();
+            scoreBoard_->increaseScore();
         }
 
-        if (m_CollisionManger->checkPlayerCollideItself(*m_Player))
+        if (collisionManger_->checkPlayerCollideItself(*player_))
         {
-            //m_ScoreBoard->updateScore()
+            //scoreBoard_->updateScore()
         }
 
-        m_Player->update();
+        player_->update();
     }
 }
 
 Game::Game()
 {
-    m_Renderer_ = make_unique<SdlRenderingEngine>();
-    m_Renderer_->addCloseEventHandler(*this);
+    renderer_ = make_unique<SdlRenderingEngine>();
+    renderer_->addCloseEventHandler(*this);
+    
+    player_ = make_unique<Player>(*renderer_);
 
-    m_Fruit = make_unique<Fruit>(*m_Renderer_);
-    m_Border = make_unique<Border>(*m_Renderer_);
-    m_Player = make_unique<Player>(*m_Renderer_);
-    m_Renderer_->attachMovableObserver(*m_Player);
+    positionGenerator_ = make_unique<PositionGenerator>(*player_);
 
-    m_ScoreBoard = make_unique<ScoreBoard>(*m_Renderer_);
-    m_GameOver = make_unique<GameOver>(*m_Renderer_);
+    fruit_ = make_unique<Fruit>(*renderer_, *positionGenerator_);
+    border_ = make_unique<Border>(*renderer_);
+    renderer_->attachMovableObserver(*player_);
 
-    m_CollisionManger = make_unique<CollisionManager>();
-    m_GameTimer = make_unique<GameTimer>();
+    scoreBoard_ = make_unique<ScoreBoard>(*renderer_);
+    gameOver_ = make_unique<GameOver>(*renderer_);
+
+    collisionManger_ = make_unique<CollisionManager>();
+    gameTimer_ = make_unique<GameTimer>();
 }
 
 void Game::handleInput() const
 {
-    m_Renderer_->pollEvents();
+    renderer_->pollEvents();
 }
     
 void Game::render()
 {
-    m_Renderer_->clearScreen();
-    m_Border->render();
-    m_Fruit->render();
-    m_Player->render();
-    m_ScoreBoard->render();
+    renderer_->clearScreen();
+    border_->render();
+    fruit_->render();
+    player_->render();
+    scoreBoard_->render();
 
     if (m_isGameOver)
     {
-        m_GameOver->render();
+        gameOver_->render();
     }
-    m_Renderer_->renderScreen();
+    renderer_->renderScreen();
 }
 
 bool Game::isGameOver() const

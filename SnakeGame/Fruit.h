@@ -2,22 +2,24 @@
 #define FRUIT_H
 
 #include "GameObject.h"
-#include "Point2D.h"
+#include "PositionGenerator.h"
 
 class Fruit : public GameObject
 {
 public:
-    Fruit(const Renderer &renderingEngine);
+    Fruit(const Renderer &renderingEngine, PositionGenerator& positionGenerator);
+    Fruit(const Renderer &renderingEngine) = delete;
     void render() override;
     void update() override;
 
-    int getX();
-    int getY();
     Point2D getPosition();
     void generateNewPosition();
+
 private:
-    Point2D m_position;
     void generateRandomPosition();
+
+    PositionGenerator &positionGenerator_;
+    Point2D position_;
 };
 
 #endif

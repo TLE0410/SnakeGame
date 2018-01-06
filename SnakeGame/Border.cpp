@@ -13,7 +13,7 @@ Border::Border(const Renderer &renderer) : GameObject(renderer)
 
 void Border::render()
 {
-    // border is outside of the game field, nothing to draw
+    // border_ is outside of the game field, nothing to draw
 }
 
 const std::vector<Point2D*> Border::getBorder() const
