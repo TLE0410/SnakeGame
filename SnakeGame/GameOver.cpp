@@ -10,7 +10,7 @@ void GameOver::render()
     if (m_needToRender)
     {
         //Utils::PrintText(
-        //    Constants::GAME_FIELD_WIDTH + 5, 5, "GAME OVER");
+        //    Constants::GAME_FIELD_WIDTH_CELLS + 5, 5, "GAME OVER");
         //m_needToRender = false;
     }
 }

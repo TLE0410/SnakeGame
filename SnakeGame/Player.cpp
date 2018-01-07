@@ -7,8 +7,8 @@ Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
 {
     moveDirection = Direction::up;
     Point2D* startPosition = new Point2D;
-    startPosition->x = Constants::GAME_FIELD_WIDTH / 2;
-    startPosition->y = Constants::GAME_FIELD_HEIGHT / 2;
+    startPosition->x = Constants::GAME_FIELD_WIDTH_CELLS / 2;
+    startPosition->y = Constants::GAME_FIELD_HEIGHT_CELLS / 2;
     m_snakePositions.push_back(startPosition);
 
     m_snakePositions.push_back(new Point2D(startPosition->x, startPosition->y + 1));

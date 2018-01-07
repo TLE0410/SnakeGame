@@ -14,7 +14,6 @@ public:
 
 private:
     int m_Score;
-    bool m_NeedToRenderScore;
 };
 
 #endif

@@ -11,8 +11,8 @@ SdlRenderingEngine::SdlRenderingEngine()
 
 void SdlRenderingEngine::renderBox(int x, int y, Color color) const
 {
-    const int boxWidth = Constants::SCREEN_WIDTH / Constants::GAME_FIELD_WIDTH;
-    const int boxHeight = Constants::SCREEN_HEIGHT / Constants::GAME_FIELD_HEIGHT;
+    const int boxWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
+    const int boxHeight = Constants::GAME_FIELD_HEIGHT_PIXELS / Constants::GAME_FIELD_HEIGHT_CELLS;
 
     const int boxX = (x - 1) * boxWidth;
     const int boxY = (y - 1) * boxHeight;

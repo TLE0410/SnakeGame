@@ -23,7 +23,7 @@ const std::vector<Point2D*> Border::getBorder() const
 
 void Border::addTopHorizontalLine()
 {
-    for (int i = 1; i <= Constants::GAME_FIELD_WIDTH; i++)
+    for (int i = 1; i <= Constants::GAME_FIELD_WIDTH_CELLS; i++)
     {
         Point2D* p = new Point2D;
         p->x = i;
@@ -34,7 +34,7 @@ void Border::addTopHorizontalLine()
 
 void Border::addLeftVerticalLine()
 {
-    for (int i = 2; i <= Constants::GAME_FIELD_HEIGHT - 1; i++)
+    for (int i = 2; i <= Constants::GAME_FIELD_HEIGHT_CELLS - 1; i++)
     {
         Point2D* p = new Point2D;
         p->x = 0;
@@ -45,10 +45,10 @@ void Border::addLeftVerticalLine()
 
 void Border::addRightVerticalLine()
 {
-    for (int i = 2; i <= Constants::GAME_FIELD_HEIGHT - 1; i++)
+    for (int i = 2; i <= Constants::GAME_FIELD_HEIGHT_CELLS - 1; i++)
     {
         Point2D* p = new Point2D;
-        p->x = Constants::GAME_FIELD_WIDTH + 1;
+        p->x = Constants::GAME_FIELD_WIDTH_CELLS + 1;
         p->y = i;
         m_borderPoints.push_back(p);
     }
@@ -56,11 +56,11 @@ void Border::addRightVerticalLine()
 
 void Border::addBottomHorizontalLine()
 {
-    for (int i = 1; i <= Constants::GAME_FIELD_WIDTH; i++)
+    for (int i = 1; i <= Constants::GAME_FIELD_WIDTH_CELLS; i++)
     {
         Point2D* p = new Point2D();
         p->x = i;
-        p->y = Constants::GAME_FIELD_HEIGHT + 1;
+        p->y = Constants::GAME_FIELD_HEIGHT_CELLS + 1;
         m_borderPoints.push_back(p);
     }
 }

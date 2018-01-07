@@ -21,8 +21,8 @@ Point2D PositionGenerator::generateNewPosition() const
 
     while (true)
     {
-        newPosition.x = rand() % Constants::GAME_FIELD_WIDTH + 1;
-        newPosition.y = rand() % Constants::GAME_FIELD_HEIGHT +1;
+        newPosition.x = rand() % Constants::GAME_FIELD_WIDTH_CELLS + 1;
+        newPosition.y = rand() % Constants::GAME_FIELD_HEIGHT_CELLS +1;
 
         if (!newPositionCollidesWithSnake(newPosition))
         {
