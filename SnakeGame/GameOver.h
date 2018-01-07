@@ -6,7 +6,7 @@
 class GameOver : GameObject
 {
 public:
-    GameOver(const Renderer &renderer);
+    GameOver(Renderer &renderer);
     void render() override;
     void update() override {};
 private:

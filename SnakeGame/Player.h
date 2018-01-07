@@ -10,7 +10,7 @@
 class Player : public GameObject, public MovableObserver
 {
 public:
-    Player(const Renderer &renderingEngine);
+    Player(Renderer &renderingEngine);
     void render() override;
     void update() override;
 
@@ -22,6 +22,7 @@ public:
     Point2D getHeadPosition();
     Direction getDirection();
     void increaseLength();
+    int getLength() const;
 
     typedef std::vector<Point2D*>::const_iterator const_iterator;
     const_iterator body_begins() const;

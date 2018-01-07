@@ -2,18 +2,22 @@
 #define SCOREBOARD_H
 
 #include "GameObject.h"
+#include <vector>
+#include "Point2D.h"
 
 class ScoreBoard : GameObject
 {
 public:
-    ScoreBoard(const Renderer &renderer);
-    void increaseScore();
-
+    ScoreBoard(Renderer &renderer);
     void render() override;
-    void update() override {};
+    void update() override {}
 
+    void increaseScore();
+    void updateScore(int newScore);;
 private:
-    int m_Score;
+    void updateRenderedText() const;
+    std::vector<Point2D*> scoreBoard_;
+    int score_;
 };
 
 #endif

@@ -3,7 +3,7 @@
 #include "Utils.h"
 #include "Constants.h"
 
-Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
+Player::Player(Renderer &renderingEngine) : GameObject(renderingEngine)
 {
     moveDirection = Direction::up;
     Point2D* startPosition = new Point2D;
@@ -11,8 +11,10 @@ Player::Player(const Renderer &renderingEngine) : GameObject(renderingEngine)
     startPosition->y = Constants::GAME_FIELD_HEIGHT_CELLS / 2;
     m_snakePositions.push_back(startPosition);
 
-    m_snakePositions.push_back(new Point2D(startPosition->x, startPosition->y + 1));
-    m_snakePositions.push_back(new Point2D(startPosition->x, startPosition->y + 2));
+    for (int i = 1; i < Constants::SNAKE_INITIAL_LENGTH; i++)
+    {
+        m_snakePositions.push_back(new Point2D(startPosition->x, startPosition->y + i));
+    }
 
     needToIncreaseLength = false;
     isAlive = true;
@@ -29,7 +31,12 @@ void Player::render()
 
 void Player::update()
 {
-    if (moveDirection == Direction::none)
+#define DEBUG_DIRECTION_BUG 
+#ifdef DEBUG_DIRECTION_BUG
+    return;
+#endif
+
+if (moveDirection == Direction::none)
     {
         return;
     }
@@ -108,6 +115,11 @@ void Player::increaseLength()
     needToIncreaseLength = true;
 }
 
+int Player::getLength() const
+{
+    return m_snakePositions.size();
+}
+
 Player::const_iterator Player::body_begins() const
 {
     return m_snakePositions.begin();
@@ -123,8 +135,29 @@ void Player::removeBodyStartingWith(const std::vector<Point2D*>::const_iterator 
     m_snakePositions.erase(positionToRemoveFrom, m_snakePositions.end());
 }
 
+void printDirection(Direction direction)
+{
+    switch (direction)
+    {
+        case up:
+            Utils::Log(("up"));
+            break;
+        case down:
+            Utils::Log(("up"));
+            break;
+        case left:
+            Utils::Log(("left"));
+            break;
+        case right:
+            Utils::Log(("right"));
+            break;
+    }
+
+}
+
 void Player::changeDirection(Direction direction)
 {
+    printDirection(direction);
     if (!oppositeDirections(moveDirection, direction))
     {
         moveDirection = direction;

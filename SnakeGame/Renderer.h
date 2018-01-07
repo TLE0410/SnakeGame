@@ -1,6 +1,7 @@
 #ifndef RENDERINGENGINE_H
 #define RENDERINGENGINE_H
 
+#include <string>
 #include "MovableObserver.h"
 #include "CloseEventHandler.h"
 #include "Color.h"
@@ -15,6 +16,9 @@ public:
     virtual void clearScreen() = 0;
     virtual void renderScreen() = 0;
     virtual void renderBox(int x, int y, Color color) const = 0;
+    virtual void renderBox(int x, int y, int width, int height, Color color) const = 0;
+    virtual void setText(const std::string textToRender) = 0;
+    virtual void renderText() = 0;
 };
 
 #endif // RENDERINGENGINE_H

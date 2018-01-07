@@ -2,7 +2,7 @@
 #include "Utils.h"
 
 
-Fruit::Fruit(const Renderer& renderingEngine, PositionGenerator& positionGenerator) :
+Fruit::Fruit(Renderer& renderingEngine, PositionGenerator& positionGenerator) :
     GameObject(renderingEngine),
     positionGenerator_(positionGenerator)
 {

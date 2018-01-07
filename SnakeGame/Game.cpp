@@ -3,6 +3,7 @@
 #include "Border.h"
 #include "Player.h"
 #include "SDLRenderingEngine.h"
+#include "Constants.h"
 
 using std::make_unique;
 
@@ -22,7 +23,7 @@ void Game::update()
 
         if (collisionManger_->checkPlayerCollideItself(*player_))
         {
-            //scoreBoard_->updateScore()
+            scoreBoard_->updateScore(player_->getLength() - Constants::SNAKE_INITIAL_LENGTH);
         }
 
         player_->update();

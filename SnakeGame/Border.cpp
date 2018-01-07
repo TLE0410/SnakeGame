@@ -3,7 +3,7 @@
 #include "Utils.h"
 #include  "Constants.h"
 
-Border::Border(const Renderer &renderer) : GameObject(renderer)
+Border::Border(Renderer &renderer) : GameObject(renderer)
 {
     addTopHorizontalLine();
     addLeftVerticalLine();

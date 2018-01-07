@@ -7,8 +7,8 @@
 class Fruit : public GameObject
 {
 public:
-    Fruit(const Renderer &renderingEngine, PositionGenerator& positionGenerator);
-    Fruit(const Renderer &renderingEngine) = delete;
+    Fruit(Renderer &renderingEngine, PositionGenerator& positionGenerator);
+    Fruit(Renderer &renderingEngine) = delete;
     void render() override;
     void update() override;
 

@@ -6,17 +6,17 @@
 class GameObject
 {
 public:
-    GameObject(const Renderer &renderer);
+    GameObject(Renderer &renderer);
     virtual ~GameObject() = default;
     virtual void render() = 0;
     virtual void update() = 0;
 protected:
-    const Renderer &renderer_;
+    Renderer &renderer_;
 private:
     GameObject() = default;
 };
 
-inline GameObject::GameObject(const Renderer &renderer) : renderer_(renderer)
+inline GameObject::GameObject(Renderer &renderer) : renderer_(renderer)
 {
 }
 

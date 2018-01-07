@@ -1,6 +1,6 @@
 #include "GameOver.h"
 
-GameOver::GameOver(const Renderer& renderer) : GameObject(renderer)
+GameOver::GameOver(Renderer& renderer) : GameObject(renderer)
 {
     m_needToRender = true;
 }

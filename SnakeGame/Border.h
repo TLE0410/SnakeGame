@@ -8,7 +8,7 @@
 class Border : public GameObject
 {
 public:
-    Border(const Renderer &renderer);
+    Border(Renderer &renderer);
     void render() override;
     void update() override{};
 
