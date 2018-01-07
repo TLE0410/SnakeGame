@@ -1,6 +1,5 @@
 TODO:
 ~~~~
-Add score
 Add game over message when snake hits the wall
 Add game win message
 
@@ -9,3 +8,5 @@ Done:
 Add color to the snake and apple
 Fix bug with apple being generated in the snake
 When snake eats itself it looses the tail
+Add score
+Fix the bug with turning 180 degrees

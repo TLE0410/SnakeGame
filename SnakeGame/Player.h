@@ -27,12 +27,13 @@ public:
     typedef std::vector<Point2D*>::const_iterator const_iterator;
     const_iterator body_begins() const;
     const_iterator body_ends() const;
-    void removeBodyStartingWith(const const_iterator positionToRemoveFrom);
+    void removeBodyStartingWith(const_iterator positionToRemoveFrom);
 
 private:
     std::vector<Point2D*> m_snakePositions;
 
-    Direction moveDirection;
+    Direction moveDirection_;
+    Direction futureMoveDirection_;
 
     bool isAlive;
     Point2D pointToEraise;

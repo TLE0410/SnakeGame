@@ -5,7 +5,9 @@
 
 Player::Player(Renderer &renderingEngine) : GameObject(renderingEngine)
 {
-    moveDirection = Direction::up;
+    futureMoveDirection_ = Direction::up;
+    moveDirection_ = futureMoveDirection_;
+
     Point2D* startPosition = new Point2D;
     startPosition->x = Constants::GAME_FIELD_WIDTH_CELLS / 2;
     startPosition->y = Constants::GAME_FIELD_HEIGHT_CELLS / 2;
@@ -31,28 +33,30 @@ void Player::render()
 
 void Player::update()
 {
-#define DEBUG_DIRECTION_BUG 
-#ifdef DEBUG_DIRECTION_BUG
-    return;
-#endif
+//#define DEBUG_DIRECTION_BUG 
+//#ifdef DEBUG_DIRECTION_BUG
+//    return;
+//#endif
 
-if (moveDirection == Direction::none)
+    if (futureMoveDirection_ == Direction::none)
     {
         return;
     }
 
     if (!isAlive)
     {
-        moveDirection = Direction::none;
+        moveDirection_ = Direction::none;
         return;
     }
+
+    moveDirection_ = futureMoveDirection_;
 
     Point2D newPosition;
     const auto snakeHead = m_snakePositions.front();
     newPosition.x = snakeHead->x;
     newPosition.y = snakeHead->y;
 
-    moveSnakeHead(snakeHead, moveDirection);
+    moveSnakeHead(snakeHead, moveDirection_);
 
     Point2D oldPosition;
     if (m_snakePositions.size() > 1)
@@ -107,7 +111,7 @@ Point2D Player::getHeadPosition()
 
 Direction Player::getDirection()
 {
-    return moveDirection;
+    return futureMoveDirection_;
 }
 
 void Player::increaseLength()
@@ -130,7 +134,7 @@ Player::const_iterator Player::body_ends() const
     return m_snakePositions.end();
 }
 
-void Player::removeBodyStartingWith(const std::vector<Point2D*>::const_iterator positionToRemoveFrom)
+void Player::removeBodyStartingWith(std::vector<Point2D*>::const_iterator positionToRemoveFrom)
 {
     m_snakePositions.erase(positionToRemoveFrom, m_snakePositions.end());
 }
@@ -158,9 +162,9 @@ void printDirection(Direction direction)
 void Player::changeDirection(Direction direction)
 {
     printDirection(direction);
-    if (!oppositeDirections(moveDirection, direction))
+    if (!oppositeDirections(moveDirection_, direction))
     {
-        moveDirection = direction;
+        futureMoveDirection_ = direction;
     }
 }
 
