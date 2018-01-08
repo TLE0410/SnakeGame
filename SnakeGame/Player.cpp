@@ -31,6 +31,35 @@ void Player::render()
     }
 }
 
+void Player::moveSnake()
+{
+    moveDirection_ = futureMoveDirection_;
+    auto snakeHead = m_snakePositions.front();
+    Point2D newPosition = *snakeHead;
+    
+    *snakeHead = Utils::getNextPosition(*snakeHead, moveDirection_);
+
+    if (m_snakePositions.size() > 1)
+    {
+        std::vector<Point2D*>::iterator mIter = m_snakePositions.begin();
+        for (advance(mIter, 1); mIter != m_snakePositions.end(); ++mIter)
+        {
+            Point2D oldPosition = **mIter;
+            **mIter = newPosition;
+            newPosition = oldPosition;
+        }
+    }
+
+    if (needToIncreaseLength)
+    {
+        Point2D* newPoint = new Point2D;
+        *newPoint = newPosition;
+
+        m_snakePositions.push_back(newPoint);
+        needToIncreaseLength = false;
+    }
+}
+
 void Player::update()
 {
     if (futureMoveDirection_ == Direction::none)
@@ -44,41 +73,7 @@ void Player::update()
         return;
     }
 
-    moveDirection_ = futureMoveDirection_;
-
-    Point2D newPosition;
-    const auto snakeHead = m_snakePositions.front();
-    newPosition.x = snakeHead->x;
-    newPosition.y = snakeHead->y;
-
-    moveSnakeHead(snakeHead, moveDirection_);
-
-    Point2D oldPosition;
-    if (m_snakePositions.size() > 1)
-    {
-        std::vector<Point2D*>::iterator mIter = m_snakePositions.begin();
-        for (advance(mIter, 1); mIter != m_snakePositions.end(); ++mIter)
-        {
-            oldPosition.x = (*mIter)->x;
-            oldPosition.y = (*mIter)->y;
-
-            (*mIter)->x = newPosition.x;
-            (*mIter)->y = newPosition.y;
-
-            newPosition.x = oldPosition.x;
-            newPosition.y = oldPosition.y;
-        }
-    }
-
-    if (needToIncreaseLength)
-    {
-        Point2D* newPoint = new Point2D;
-        newPoint->x = newPosition.x;
-        newPoint->y = newPosition.y;
-
-        m_snakePositions.push_back(newPoint);
-        needToIncreaseLength = false;
-    }
+    moveSnake();
 }
 
 void Player::die()
@@ -139,16 +134,12 @@ void printDirection(Direction direction)
     switch (direction)
     {
         case up:
-            Utils::Log(("up"));
             break;
         case down:
-            Utils::Log(("up"));
             break;
         case left:
-            Utils::Log(("left"));
             break;
         case right:
-            Utils::Log(("right"));
             break;
     }
 
