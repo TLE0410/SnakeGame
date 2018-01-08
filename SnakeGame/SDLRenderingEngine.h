@@ -6,6 +6,8 @@
 #include <SDL.h>
 #include <vector>
 #include <SDL_ttf.h>
+#include "TextTexture.h"
+#include <memory>
 
 class SdlRenderingEngine : public Renderer
 {
@@ -19,25 +21,25 @@ public:
     void addCloseEventHandler(CloseEventHandler& closeEventHandler) override;
     void clearScreen() override;
     void renderScreen() override;
-
     void setText(const std::string textToRender) override;
     void renderText() override;
+    void renderGameOver() const override;
 
 private:
     void executeChangeDirection(Direction direction);
     void InitializeSDL();
     void processKeyCode(SDL_Event e);
+    void renderGameOverBox() const;
+    void renderGameOverText() const;
+
+    std::shared_ptr<TextTexture> scrore_text_;
+    std::shared_ptr<TextTexture> game_over_text_;
+
     SDL_Window* window_ = nullptr;
     SDL_Surface* screen_surface_ = nullptr;
     SDL_Renderer* sdl_renderer_ = nullptr;
     std::vector<MovableObserver*> movable_observers_;
     CloseEventHandler* close_event_handler_;
-
-    std::string textToRender_;
-    SDL_Texture *text_texture_ = nullptr;
-    TTF_Font *font_ = nullptr;
-    int text_width_;
-    int text_height_;
 };
 
 #endif

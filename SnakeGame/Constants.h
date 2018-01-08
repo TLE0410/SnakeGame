@@ -16,6 +16,13 @@ namespace Constants
     static const int SCORE_BOARD_WIDTH_PIXELS = SCREEN_WIDTH;
     static const int SCORE_BOARD_HEIGHT_PIXELS = SCREEN_HEIGHT - GAME_FIELD_HEIGHT_PIXELS;
 
+    static const int GAME_OVER_BOX_X = 50;
+    static const int GAME_OVER_BOX_Y = 150;
+    static const int GAME_OVER_BOX_WIDTH = 300;
+    static const int GAME_OVER_BOX_HEIGHT = 100;
+    static const int GAME_OVER_MESSAGE_X = 50;
+    static const int GAME_OVER_MESSAGE_Y = 150;
+
     static const int SNAKE_MOVE_RATE = 300; // in millisecods
 
     static const int SNAKE_INITIAL_LENGTH = 3;
@@ -27,6 +34,3 @@ namespace Constants
 }
 
 #endif
-
-
-

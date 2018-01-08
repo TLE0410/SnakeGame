@@ -85,7 +85,3 @@ void Game::handleCloseEvent()
     isGameActive = false;
 }
 
-void Game::printGameOver()
-{
-    
-}

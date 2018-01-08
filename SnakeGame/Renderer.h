@@ -19,6 +19,7 @@ public:
     virtual void renderBox(int x, int y, int width, int height, Color color) const = 0;
     virtual void setText(const std::string textToRender) = 0;
     virtual void renderText() = 0;
+    virtual void renderGameOver() const = 0;
 };
 
 #endif // RENDERINGENGINE_H

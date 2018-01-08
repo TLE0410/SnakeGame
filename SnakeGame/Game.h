@@ -38,8 +38,6 @@ private:
 
     bool isGameActive = true;
     bool m_isGameOver = false;
-
-    void printGameOver();
 };
 
 #endif

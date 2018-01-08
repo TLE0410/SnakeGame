@@ -21,8 +21,8 @@ void SdlRenderingEngine::renderBox(int x, int y, int width, int height, Color co
     const int cellWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
     const int cellHeight = Constants::GAME_FIELD_HEIGHT_PIXELS / Constants::GAME_FIELD_HEIGHT_CELLS;
 
-    int boxWidth = cellWidth * width;
-    int boxHeight = cellHeight * height;
+    const int boxWidth = cellWidth * width;
+    const int boxHeight = cellHeight * height;
 
     const int boxX = (x - 1) * cellWidth;
     const int boxY = (y - 1) * cellHeight;
@@ -32,7 +32,6 @@ void SdlRenderingEngine::renderBox(int x, int y, int width, int height, Color co
     SDL_SetRenderDrawBlendMode(sdl_renderer_, SDL_BLENDMODE_BLEND);
     SDL_SetRenderDrawColor(sdl_renderer_, color.red, color.green, color.blue, color.alpha);
     SDL_RenderFillRect(sdl_renderer_, &fillRect);
-
 }
 
 void SdlRenderingEngine::pollEvents()
@@ -73,36 +72,42 @@ void SdlRenderingEngine::renderScreen()
     SDL_RenderPresent(sdl_renderer_);
 }
 
+
 void SdlRenderingEngine::setText(const std::string textToRender)
 {
-    textToRender_ = textToRender;
-
-    const SDL_Color textColor = { 0, 0, 0 };
-    SDL_Surface* text_surface = TTF_RenderText_Solid(font_, textToRender.c_str(), textColor);
-
-    if (text_surface == nullptr)
-    {
-        throw std::runtime_error("Unable to render text surface! SDL_ttf Error: " + std::string(TTF_GetError()));
-    }
-
-    text_texture_ = SDL_CreateTextureFromSurface(sdl_renderer_, text_surface);
-    if (text_texture_ == nullptr)
-    {
-        throw std::runtime_error("Unable to create texture from rendered text! SDL Error: " + std::string(SDL_GetError()));
-    }
-
-    SDL_FreeSurface(text_surface);
-
-    TTF_SizeText(font_, textToRender_.c_str(), &text_width_, &text_height_);
+    scrore_text_->updateText(textToRender);
 }
 
 void SdlRenderingEngine::renderText()
 {
-    SDL_Rect renderQuad = { 0, Constants::GAME_FIELD_HEIGHT_PIXELS,
-        text_width_, text_height_};
+    SDL_RenderCopy(sdl_renderer_, scrore_text_->getTexture(),
+        nullptr, scrore_text_->getTextRect());
+}
 
-    SDL_RenderCopy(sdl_renderer_, text_texture_, NULL, &renderQuad);
-    //SDL_RenderCopyEx(sdl_renderer_, text_texture_, NULL, &renderQuad, NULL, NULL, SDL_FLIP_NONE);
+void SdlRenderingEngine::renderGameOver() const
+{
+    renderGameOverBox();
+    renderGameOverText();
+}
+
+void SdlRenderingEngine::renderGameOverBox() const
+{
+    using namespace Constants;
+    SDL_Rect fillRect = { 
+        GAME_OVER_BOX_X, GAME_OVER_BOX_Y, 
+        GAME_OVER_BOX_WIDTH, GAME_OVER_BOX_HEIGHT};
+
+    const Color color(0, 153, 153, 255);
+
+    SDL_SetRenderDrawBlendMode(sdl_renderer_, SDL_BLENDMODE_BLEND);
+    SDL_SetRenderDrawColor(sdl_renderer_, color.red, color.green, color.blue, color.alpha);
+    SDL_RenderFillRect(sdl_renderer_, &fillRect);
+}
+
+void SdlRenderingEngine::renderGameOverText() const
+{
+    SDL_RenderCopy(sdl_renderer_, game_over_text_->getTexture(),
+        nullptr, game_over_text_->getTextRect());
 }
 
 void SdlRenderingEngine::executeChangeDirection(Direction direction)
@@ -143,11 +148,11 @@ void SdlRenderingEngine::InitializeSDL()
         throw std::runtime_error("Renderer could not be created! SDL_Error: " + std::string(SDL_GetError()));
     }
 
-    font_ = TTF_OpenFont("res\\fonts\\arcadeclassic.ttf", 40);
-    if (font_ == nullptr)
-    {
-        throw std::runtime_error("Failed to load the font! SDL_ttf Error: " + std::string(SDL_GetError()));
-    }
+    scrore_text_ = std::make_shared<TextTexture>(
+        *sdl_renderer_, 0, Constants::GAME_FIELD_HEIGHT_PIXELS, "Score 0");
+
+    game_over_text_ = std::make_shared<TextTexture>(
+        *sdl_renderer_,  Constants::GAME_OVER_MESSAGE_X, Constants::GAME_OVER_MESSAGE_Y, "Game Over");
 }
 
 void SdlRenderingEngine::processKeyCode(SDL_Event e)

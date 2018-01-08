@@ -33,11 +33,6 @@ void Player::render()
 
 void Player::update()
 {
-//#define DEBUG_DIRECTION_BUG 
-//#ifdef DEBUG_DIRECTION_BUG
-//    return;
-//#endif
-
     if (futureMoveDirection_ == Direction::none)
     {
         return;
