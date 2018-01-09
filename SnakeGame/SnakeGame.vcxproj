@@ -152,6 +152,7 @@ xcopy "$(ProjectDir)res" "$(TargetDir)\res" /r /y /e</Command>
     <ClCompile Include="PositionGenerator.cpp" />
     <ClCompile Include="SDLRenderingEngine.cpp" />
     <ClCompile Include="ScoreBoard.cpp" />
+    <ClCompile Include="SpriteSheetTexture.cpp" />
     <ClCompile Include="TextTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,6 +177,8 @@ xcopy "$(ProjectDir)res" "$(TargetDir)\res" /r /y /e</Command>
     <ClInclude Include="SDLRenderingEngine.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScoreBoard.h" />
+    <ClInclude Include="SnakeBodyPart.h" />
+    <ClInclude Include="SpriteSheetTexture.h" />
     <ClInclude Include="TextTexture.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>

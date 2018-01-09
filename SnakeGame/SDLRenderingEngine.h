@@ -15,7 +15,9 @@ public:
     SdlRenderingEngine();
     ~SdlRenderingEngine();
     void renderBox(Point2D point, Color color) const override;
+    void renderDirectionalBox(DirectionalPoint2D point, Color color) const override;
     void renderBox(int x, int y, int width, int height, Color color) const override;
+    
     void pollEvents() override;
     void attachMovableObserver(MovableObserver &movableObserver) override;
     void addCloseEventHandler(CloseEventHandler& closeEventHandler) override;
@@ -24,6 +26,8 @@ public:
     void setText(const std::string textToRender) override;
     void renderText() override;
     void renderGameOver() const override;
+
+    void renderSnakeBox(Point2D point, Direction direction, SnakeBodyPart bodyPart) const override;
 
 private:
     void executeChangeDirection(Direction direction);

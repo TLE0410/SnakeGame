@@ -16,6 +16,11 @@ void SdlRenderingEngine::renderBox(Point2D point, Color color) const
     renderBox(point.x, point.y, 1, 1, color);
 }
 
+void SdlRenderingEngine::renderDirectionalBox(DirectionalPoint2D point, Color color) const
+{
+    
+}
+
 void SdlRenderingEngine::renderBox(int x, int y, int width, int height, Color color) const
 {
     const int cellWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
@@ -88,6 +93,12 @@ void SdlRenderingEngine::renderGameOver() const
 {
     renderGameOverBox();
     renderGameOverText();
+}
+
+void SdlRenderingEngine::renderSnakeBox(Point2D point, Direction direction, SnakeBodyPart bodyPart) const
+{
+
+
 }
 
 void SdlRenderingEngine::renderGameOverBox() const

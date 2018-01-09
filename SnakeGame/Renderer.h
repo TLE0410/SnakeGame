@@ -6,6 +6,8 @@
 #include "CloseEventHandler.h"
 #include "Color.h"
 #include "Point2D.h"
+#include "DirectionalPoint2D.h"
+#include "SnakeBodyPart.h"
 
 class Renderer
 {
@@ -17,10 +19,13 @@ public:
     virtual void clearScreen() = 0;
     virtual void renderScreen() = 0;
     virtual void renderBox(Point2D point, Color color) const = 0;
+    virtual void renderDirectionalBox(DirectionalPoint2D point, Color color) const = 0;
     virtual void renderBox(int x, int y, int width, int height, Color color) const = 0;
     virtual void setText(const std::string textToRender) = 0;
     virtual void renderText() = 0;
     virtual void renderGameOver() const = 0;
+
+    virtual void renderSnakeBox(Point2D point, Direction direction, SnakeBodyPart bodyPart) const = 0;
 };
 
 #endif // RENDERINGENGINE_H
