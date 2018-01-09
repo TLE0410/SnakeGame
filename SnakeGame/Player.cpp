@@ -8,14 +8,18 @@ Player::Player(Renderer &renderingEngine) : GameObject(renderingEngine)
     futureMoveDirection_ = Direction::up;
     moveDirection_ = futureMoveDirection_;
 
-    Point2D* startPosition = new Point2D;
-    startPosition->x = Constants::GAME_FIELD_WIDTH_CELLS / 2;
-    startPosition->y = Constants::GAME_FIELD_HEIGHT_CELLS / 2;
+    DirectionalPoint2D* startPosition = new DirectionalPoint2D(
+        Constants::GAME_FIELD_WIDTH_CELLS / 2,
+        Constants::GAME_FIELD_HEIGHT_CELLS / 2,
+        Direction::up);
+
     m_snakePositions.push_back(startPosition);
 
     for (int i = 1; i < Constants::SNAKE_INITIAL_LENGTH; i++)
     {
-        m_snakePositions.push_back(new Point2D(startPosition->x, startPosition->y + i));
+        m_snakePositions.push_back(
+            new DirectionalPoint2D(
+                startPosition->x, startPosition->y + i, Direction::up));
     }
 
     needToIncreaseLength = false;
@@ -25,26 +29,26 @@ Player::Player(Renderer &renderingEngine) : GameObject(renderingEngine)
 void Player::render()
 {
     const Color greenColor(0, 255, 0, 200);
-    for (Point2D* point : m_snakePositions)
+    for (auto point : m_snakePositions)
     {
-        renderer_.renderBox(point->x, point->y, greenColor);
+        renderer_.renderBox(static_cast<Point2D>(*point), greenColor);
     }
 }
 
 void Player::moveSnake()
 {
     moveDirection_ = futureMoveDirection_;
-    auto snakeHead = m_snakePositions.front();
-    Point2D newPosition = *snakeHead;
+    const auto snakeHead = m_snakePositions.front();
+    DirectionalPoint2D newPosition = *snakeHead;
     
     *snakeHead = Utils::getNextPosition(*snakeHead, moveDirection_);
 
     if (m_snakePositions.size() > 1)
     {
-        std::vector<Point2D*>::iterator mIter = m_snakePositions.begin();
+        auto mIter = m_snakePositions.begin();
         for (advance(mIter, 1); mIter != m_snakePositions.end(); ++mIter)
         {
-            Point2D oldPosition = **mIter;
+            const DirectionalPoint2D oldPosition = **mIter;
             **mIter = newPosition;
             newPosition = oldPosition;
         }
@@ -52,10 +56,7 @@ void Player::moveSnake()
 
     if (needToIncreaseLength)
     {
-        Point2D* newPoint = new Point2D;
-        *newPoint = newPosition;
-
-        m_snakePositions.push_back(newPoint);
+        m_snakePositions.push_back(new DirectionalPoint2D(newPosition));
         needToIncreaseLength = false;
     }
 }
@@ -91,12 +92,9 @@ int Player::getHeadY()
     return m_snakePositions.front()->y;
 }
 
-Point2D Player::getHeadPosition()
+DirectionalPoint2D Player::getHeadPosition()
 {
-    Point2D result;
-    result.x = m_snakePositions[0]->x;
-    result.y = m_snakePositions[0]->y;
-    return result;
+    return DirectionalPoint2D(*m_snakePositions[0]);
 }
 
 Direction Player::getDirection()
@@ -124,7 +122,7 @@ Player::const_iterator Player::body_ends() const
     return m_snakePositions.end();
 }
 
-void Player::removeBodyStartingWith(std::vector<Point2D*>::const_iterator positionToRemoveFrom)
+void Player::removeBodyStartingWith(const_iterator positionToRemoveFrom)
 {
     m_snakePositions.erase(positionToRemoveFrom, m_snakePositions.end());
 }
@@ -142,7 +140,6 @@ void printDirection(Direction direction)
         case right:
             break;
     }
-
 }
 
 void Player::changeDirection(Direction direction)

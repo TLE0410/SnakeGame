@@ -1,9 +1,9 @@
 #include "CollisionManager.h"
 #include "Utils.h"
 
-bool CollisionManager::checkPlayerAndFruitCollision(Player & player, Fruit & fruit)
+bool CollisionManager::checkPlayerAndFruitCollision(Player & player, Fruit & fruit) const
 {
-    Point2D headNextPosition = 
+    DirectionalPoint2D headNextPosition = 
         Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
 
     if (headNextPosition.equals(fruit.getPosition()))
@@ -15,9 +15,9 @@ bool CollisionManager::checkPlayerAndFruitCollision(Player & player, Fruit & fru
     return false;
 }
 
-bool CollisionManager::checkPlayerAndBorderCollision(Player & player, const Border & border)
+bool CollisionManager::checkPlayerAndBorderCollision(Player & player, const Border & border) const
 {
-    Point2D headNextPosition = Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
+    DirectionalPoint2D headNextPosition = Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
     for (Point2D* borderPoint : border.getBorder())
     {
         if (headNextPosition.equals(*borderPoint))
@@ -29,14 +29,14 @@ bool CollisionManager::checkPlayerAndBorderCollision(Player & player, const Bord
     return false;
 }
 
-bool CollisionManager::checkPlayerCollideItself(Player & player)
+bool CollisionManager::checkPlayerCollideItself(Player & player) const
 {
-    const Point2D headNextPosition = 
+    const DirectionalPoint2D headNextPosition = 
         Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
 
     for (auto point = player.body_begins(); point != player.body_ends(); ++point)
     {
-        if ((*point)->equals(headNextPosition))
+        if (headNextPosition.equals(**point))
         {
             player.removeBodyStartingWith(std::next(point));
             return true;

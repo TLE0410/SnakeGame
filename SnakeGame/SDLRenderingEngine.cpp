@@ -11,9 +11,9 @@ SdlRenderingEngine::SdlRenderingEngine()
     InitializeSDL();
 }
 
-void SdlRenderingEngine::renderBox(int x, int y, Color color) const
+void SdlRenderingEngine::renderBox(Point2D point, Color color) const
 {
-    renderBox(x, y, 1, 1, color);
+    renderBox(point.x, point.y, 1, 1, color);
 }
 
 void SdlRenderingEngine::renderBox(int x, int y, int width, int height, Color color) const
@@ -160,7 +160,6 @@ void SdlRenderingEngine::processKeyCode(SDL_Event e)
     switch (e.key.keysym.sym)
     {
         case SDLK_UP:
-            
             executeChangeDirection(up);
             break;
         case SDLK_DOWN:
@@ -188,5 +187,4 @@ SdlRenderingEngine::~SdlRenderingEngine()
 
     SDL_Quit();
 }
-
 

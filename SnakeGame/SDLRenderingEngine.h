@@ -5,16 +5,16 @@
 #include "MovableObserver.h"
 #include <SDL.h>
 #include <vector>
-#include <SDL_ttf.h>
 #include "TextTexture.h"
 #include <memory>
+#include "Point2D.h"
 
 class SdlRenderingEngine : public Renderer
 {
 public:
     SdlRenderingEngine();
     ~SdlRenderingEngine();
-    void renderBox(int x, int y, Color color) const override;
+    void renderBox(Point2D point, Color color) const override;
     void renderBox(int x, int y, int width, int height, Color color) const override;
     void pollEvents() override;
     void attachMovableObserver(MovableObserver &movableObserver) override;
@@ -39,7 +39,7 @@ private:
     SDL_Surface* screen_surface_ = nullptr;
     SDL_Renderer* sdl_renderer_ = nullptr;
     std::vector<MovableObserver*> movable_observers_;
-    CloseEventHandler* close_event_handler_;
+    CloseEventHandler* close_event_handler_{};
 };
 
 #endif

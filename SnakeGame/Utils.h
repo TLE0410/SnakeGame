@@ -3,8 +3,8 @@
 
 #include <string>
 #include <iostream>
-#include "Direction.h"
 #include "Point2D.h"
+#include "DirectionalPoint2D.h"
 
 namespace Utils
 {
@@ -13,9 +13,11 @@ namespace Utils
         std::cout << messageToLog << std::endl;
     }
 
-    Point2D static getNextPosition(const Point2D &point, const Direction &direction)
+    inline DirectionalPoint2D getNextPosition(const DirectionalPoint2D &point, const Direction &direction)
     {
-        Point2D resultPoint = point;
+        DirectionalPoint2D resultPoint = point;
+        resultPoint.direction = direction;
+
         switch (direction)
         {
             case up:

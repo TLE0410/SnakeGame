@@ -8,9 +8,9 @@
 class CollisionManager
 {
 public:
-    bool checkPlayerAndFruitCollision(Player& player, Fruit& fruit);
-    bool checkPlayerAndBorderCollision(Player& player, const Border& border);
-    bool checkPlayerCollideItself(Player& player);
+    bool checkPlayerAndFruitCollision(Player& player, Fruit& fruit) const;
+    bool checkPlayerAndBorderCollision(Player& player, const Border& border) const;
+    bool checkPlayerCollideItself(Player& player) const;
 };
 
 #endif

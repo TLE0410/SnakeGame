@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <vector>
-#include "Point2D.h"
+#include "DirectionalPoint2D.h"
 #include "GameObject.h"
 #include "Direction.h"
 #include "MovableObserver.h"
@@ -19,18 +19,18 @@ public:
     void die();
     int getHeadX();
     int getHeadY();
-    Point2D getHeadPosition();
+    DirectionalPoint2D getHeadPosition();
     Direction getDirection();
     void increaseLength();
     int getLength() const;
 
-    typedef std::vector<Point2D*>::const_iterator const_iterator;
+    typedef std::vector<DirectionalPoint2D*>::const_iterator const_iterator;
     const_iterator body_begins() const;
     const_iterator body_ends() const;
     void removeBodyStartingWith(const_iterator positionToRemoveFrom);
 
 private:
-    std::vector<Point2D*> m_snakePositions;
+    std::vector<DirectionalPoint2D*> m_snakePositions;
 
     Direction moveDirection_;
     Direction futureMoveDirection_;

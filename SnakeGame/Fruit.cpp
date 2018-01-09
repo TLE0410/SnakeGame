@@ -12,7 +12,7 @@ Fruit::Fruit(Renderer& renderingEngine, PositionGenerator& positionGenerator) :
 void Fruit::render()
 {
     const Color greenColor(255, 0, 0, 200);
-    renderer_.renderBox(position_.x, position_.y, greenColor);
+    renderer_.renderBox(position_, greenColor);
 }
 
 void Fruit::update()
