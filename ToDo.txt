@@ -3,7 +3,9 @@ TODO:
 Add game over message when snake hits the wall
 Add game win message
 Move SDL to smart pointers
+Add directional rendering
 Add support for raster graphics
+
 
 Done:
 ~~~~~
