@@ -29,6 +29,8 @@ public:
     void renderGameOver() const override;
 
     void renderSnakeBodyPart(int i, int y, SnakeBodyPart body_part, const double angle) const;
+    double getAngleFromBoxDirection(const BoxDirection& direction) const;
+    double getAngleFromDirection(const Direction& direction) const;
     void renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const override;
 
 private:

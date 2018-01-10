@@ -31,6 +31,11 @@ namespace Constants
     static const int APPLE_RADIUS = 10;
 
     static const char *GAME_WINDOW_TITLE = "Snake Game";
+
+    static const double RIGHT_ANGLE = 0;
+    static const double DOWN_ANGLE = 90;
+    static const double LEFT_ANGLE = 180;
+    static const double UP_ANGLE = 270;
 }
 
 #endif

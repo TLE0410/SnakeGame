@@ -47,17 +47,16 @@ void Player::moveSnake()
     DirectionalPoint2D newPosition = *snakeHead;
     
     *snakeHead = Utils::getNextPosition(*snakeHead, moveDirection_);
-    Direction nextPositionDirection = snakeHead->direction.prev;
+    newPosition.direction.next = snakeHead->direction.prev;
 
     if (m_snakePositions.size() > 1)
     {
         auto mIter = m_snakePositions.begin();
         for (advance(mIter, 1); mIter != m_snakePositions.end(); ++mIter)
         {
-            DirectionalPoint2D oldPosition = **mIter;
+            const DirectionalPoint2D oldPosition = **mIter;
             **mIter = newPosition;
-            (*mIter)->direction.setDirection(nextPositionDirection);
-
+            std::cout << (**mIter).direction.prev << " " << (**mIter).direction.prev << std::endl;
             newPosition = oldPosition;
         }
     }

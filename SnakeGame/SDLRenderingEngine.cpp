@@ -105,26 +105,91 @@ void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart 
     int x = (point.x - 1) * boxWidth;
     int y = (point.y - 1) * boxHeight;
 
-    const double angle = 0.0;
-
-    renderSnakeBodyPart(x, y, bodyPart, angle);
-}
-
-void SdlRenderingEngine::renderSnakeBodyPart(int x, int y, SnakeBodyPart bodyPart, const double angle) const
-{
+    double textureRotationAngle = getAngleFromBoxDirection(point.direction);
 
     switch (bodyPart)
     {
         case Head:
-            snake_texture_->render(x, y, &SpritePositions::SNAKE_HEAD, angle);
+        {
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_HEAD, textureRotationAngle);
             break;
+        }
         case Tail:
-            snake_texture_->render(x, y, &SpritePositions::SNAKE_TAIL, angle);
+        {
+            const double textureRotationAngle = getAngleFromDirection(point.direction.next);
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_TAIL, textureRotationAngle);
             break;
+        }
         case Body:
-            snake_texture_->render(x, y, &SpritePositions::SNAKE_BODY_STRAIGHT, angle);
-            break;
+        {
+            if (point.direction.next == point.direction.prev)
+            {
+                textureRotationAngle = getAngleFromDirection(point.direction.next);
+                snake_texture_->render(x, y, &SpritePositions::SNAKE_BODY_STRAIGHT, textureRotationAngle);
+            }
+            else
+            {
+                snake_texture_->render(x, y, &SpritePositions::SNAKE_BODY_TURN, textureRotationAngle);
+            }
+        }
     }
+}
+
+void SdlRenderingEngine::renderSnakeBodyPart(int x, int y, SnakeBodyPart bodyPart, const double angle) const
+{
+}
+
+double SdlRenderingEngine::getAngleFromBoxDirection(const BoxDirection& direction) const
+{
+    if (direction.next == up && direction.prev == up)  
+        return Constants::UP_ANGLE;
+
+    if (direction.next == down && direction.prev == down)       
+        return Constants::DOWN_ANGLE;
+    
+    if (direction.next == left && direction.prev == left)
+        return Constants::LEFT_ANGLE;
+
+    if (direction.next == right && direction.prev == right)
+        return Constants::RIGHT_ANGLE;
+
+    if (direction.next == up && direction.prev == left)
+        return 0;
+
+    if (direction.next == up && direction.prev == right)
+        return 270.0;
+
+    if (direction.next == down && direction.prev == left)
+        return 90.0;
+
+    if (direction.next == down && direction.prev == right)
+        return 180.0;
+
+    if (direction.next == left && direction.prev == up)
+        return 180.0;
+
+    if (direction.next == left && direction.prev == down)
+        return 270.0;
+
+    if (direction.next == right && direction.prev == up)
+        return 90.0;
+
+    if (direction.next == right && direction.prev == down)
+        return 0.0;
+
+    return 0;
+}
+
+double SdlRenderingEngine::getAngleFromDirection(const Direction& direction) const
+{
+    if (direction == up)
+        return 270;
+    if (direction == down)
+        return 90;
+    if (direction == left)
+        return 180;
+    if (direction == right)
+        return 0;
 }
 
 void SdlRenderingEngine::renderGameOverBox() const
