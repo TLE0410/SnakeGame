@@ -105,16 +105,24 @@ void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart 
     int x = (point.x - 1) * boxWidth;
     int y = (point.y - 1) * boxHeight;
 
+    const double angle = 0.0;
+
+    renderSnakeBodyPart(x, y, bodyPart, angle);
+}
+
+void SdlRenderingEngine::renderSnakeBodyPart(int x, int y, SnakeBodyPart bodyPart, const double angle) const
+{
+
     switch (bodyPart)
     {
         case Head:
-            snake_texture_->render(x, y, &SpritePositions::SNAKE_HEAD);
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_HEAD, angle);
             break;
         case Tail:
-            snake_texture_->render(x, y, &SpritePositions::SNAKE_TAIL);
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_TAIL, angle);
             break;
-        case BodyStraight:
-            snake_texture_->render(x, y, &SpritePositions::SNAKE_BODY_STRAIGHT);
+        case Body:
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_BODY_STRAIGHT, angle);
             break;
     }
 }

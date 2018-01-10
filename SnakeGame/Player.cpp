@@ -33,7 +33,7 @@ void Player::render()
 
     for (auto point = m_snakePositions.begin() + 1;  point != m_snakePositions.end() - 1; ++point )
     {
-        renderer_.renderSnakeBox(**point, SnakeBodyPart::BodyStraight);
+        renderer_.renderSnakeBox(**point, SnakeBodyPart::Body);
     }
 
     const auto snakeTail = m_snakePositions.back();

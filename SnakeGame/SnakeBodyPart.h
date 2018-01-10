@@ -3,6 +3,6 @@
 
 enum SnakeBodyPart
 {
-    Head, BodyStraight, BodyTurn, Tail
+    Head, Body, Tail
 };
 #endif // SNAKEBODYPART_H

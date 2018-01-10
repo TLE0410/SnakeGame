@@ -29,7 +29,7 @@ SpriteSheetTexture::~SpriteSheetTexture()
     texture_ = nullptr;
 }
 
-void SpriteSheetTexture::render(int x, int y, SDL_Rect* clip) const
+void SpriteSheetTexture::render(int x, int y, SDL_Rect* clip, const double angle) const
 {
     SDL_Rect renderQuad = { x, y, width_, height_ };
 
@@ -39,5 +39,5 @@ void SpriteSheetTexture::render(int x, int y, SDL_Rect* clip) const
         renderQuad.h = clip->h;
     }
 
-    SDL_RenderCopy(&sdl_renderer_, texture_, clip, &renderQuad);
+    SDL_RenderCopyEx(&sdl_renderer_, texture_, clip, &renderQuad, angle, NULL, SDL_FLIP_NONE);
 }
