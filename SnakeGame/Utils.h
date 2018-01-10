@@ -16,7 +16,7 @@ namespace Utils
     inline DirectionalPoint2D getNextPosition(const DirectionalPoint2D &point, const Direction &direction)
     {
         DirectionalPoint2D resultPoint = point;
-        resultPoint.direction = direction;
+        resultPoint.direction.setDirection(direction);
 
         switch (direction)
         {

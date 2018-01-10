@@ -134,6 +134,9 @@
     <ClInclude Include="SpritePositions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BoxDirection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SnakeGame.rc">

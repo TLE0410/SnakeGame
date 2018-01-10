@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "Direction.h"
 #include "MovableObserver.h"
+#include "BoxDirection.h"
 
 class Player : public GameObject, public MovableObserver
 {
