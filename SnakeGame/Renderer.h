@@ -25,7 +25,7 @@ public:
     virtual void renderText() = 0;
     virtual void renderGameOver() const = 0;
 
-    virtual void renderSnakeBox(Point2D point, Direction direction, SnakeBodyPart bodyPart) const = 0;
+    virtual void renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const = 0;
 };
 
 #endif // RENDERINGENGINE_H

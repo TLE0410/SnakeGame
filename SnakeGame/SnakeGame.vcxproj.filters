@@ -131,6 +131,9 @@
     <ClInclude Include="SpriteSheetTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SpritePositions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="SnakeGame.rc">

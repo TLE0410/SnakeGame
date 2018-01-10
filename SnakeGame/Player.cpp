@@ -28,11 +28,16 @@ Player::Player(Renderer &renderingEngine) : GameObject(renderingEngine)
 
 void Player::render()
 {
-    const Color greenColor(0, 255, 0, 200);
-    for (auto point : m_snakePositions)
+    const auto snakeHead = m_snakePositions.front();
+    renderer_.renderSnakeBox(*snakeHead, SnakeBodyPart::Head);
+
+    for (auto point = m_snakePositions.begin() + 1;  point != m_snakePositions.end() - 1; ++point )
     {
-        renderer_.renderBox(static_cast<Point2D>(*point), greenColor);
+        renderer_.renderSnakeBox(**point, SnakeBodyPart::BodyStraight);
     }
+
+    const auto snakeTail = m_snakePositions.back();
+    renderer_.renderSnakeBox(*snakeTail, SnakeBodyPart::Tail);
 }
 
 void Player::moveSnake()

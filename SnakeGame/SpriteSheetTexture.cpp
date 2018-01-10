@@ -4,12 +4,14 @@
 SpriteSheetTexture::SpriteSheetTexture(SDL_Renderer &renderer, std::string path) :
     sdl_renderer_(renderer)
 {
-    SDL_Surface *loadedSurface = IMG_Load(path.c_str());
+    SDL_Surface* loadedSurface = nullptr;
+    loadedSurface = IMG_Load(path.c_str());
     if (loadedSurface == nullptr)
     {
         throw std::runtime_error("Unable to load image " + path + IMG_GetError());
     }
 
+    texture_ = nullptr;
     texture_ = SDL_CreateTextureFromSurface(&sdl_renderer_, loadedSurface);
     if (texture_ == nullptr)
     {

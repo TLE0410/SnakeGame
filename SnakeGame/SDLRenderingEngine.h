@@ -8,6 +8,7 @@
 #include "TextTexture.h"
 #include <memory>
 #include "Point2D.h"
+#include "SpriteSheetTexture.h"
 
 class SdlRenderingEngine : public Renderer
 {
@@ -27,7 +28,7 @@ public:
     void renderText() override;
     void renderGameOver() const override;
 
-    void renderSnakeBox(Point2D point, Direction direction, SnakeBodyPart bodyPart) const override;
+    void renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const override;
 
 private:
     void executeChangeDirection(Direction direction);
@@ -44,6 +45,7 @@ private:
     SDL_Renderer* sdl_renderer_ = nullptr;
     std::vector<MovableObserver*> movable_observers_;
     CloseEventHandler* close_event_handler_{};
+    std::shared_ptr<SpriteSheetTexture> snake_texture_;
 };
 
 #endif

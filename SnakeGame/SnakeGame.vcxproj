@@ -178,6 +178,7 @@ xcopy "$(ProjectDir)res" "$(TargetDir)\res" /r /y /e</Command>
     <ClInclude Include="resource.h" />
     <ClInclude Include="ScoreBoard.h" />
     <ClInclude Include="SnakeBodyPart.h" />
+    <ClInclude Include="SpritePositions.h" />
     <ClInclude Include="SpriteSheetTexture.h" />
     <ClInclude Include="TextTexture.h" />
     <ClInclude Include="Utils.h" />

@@ -5,6 +5,8 @@
 #include "Constants.h"
 #include "CrossPlatformUtils.h"
 #include "Utils.h"
+#include "SpritePositions.h"
+#include <SDL_image.h>
 
 SdlRenderingEngine::SdlRenderingEngine()
 {
@@ -95,10 +97,26 @@ void SdlRenderingEngine::renderGameOver() const
     renderGameOverText();
 }
 
-void SdlRenderingEngine::renderSnakeBox(Point2D point, Direction direction, SnakeBodyPart bodyPart) const
+void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const
 {
+    int boxWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
+    int boxHeight = Constants::GAME_FIELD_HEIGHT_PIXELS / Constants::GAME_FIELD_HEIGHT_CELLS;
 
+    int x = (point.x - 1) * boxWidth;
+    int y = (point.y - 1) * boxHeight;
 
+    switch (bodyPart)
+    {
+        case Head:
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_HEAD);
+            break;
+        case Tail:
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_TAIL);
+            break;
+        case BodyStraight:
+            snake_texture_->render(x, y, &SpritePositions::SNAKE_BODY_STRAIGHT);
+            break;
+    }
 }
 
 void SdlRenderingEngine::renderGameOverBox() const
@@ -151,6 +169,12 @@ void SdlRenderingEngine::InitializeSDL()
         throw std::runtime_error("Window could not be created!SDL_Error: " + std::string(SDL_GetError()));
     }
 
+    int imgFlags = IMG_INIT_PNG;
+    if (!(IMG_Init(imgFlags) & imgFlags))
+    {
+        throw std::runtime_error("SDL_image could not initialize! SDL_image Error: " + std::string(IMG_GetError()));
+    }
+
     screen_surface_ = SDL_GetWindowSurface(window_);
     sdl_renderer_ = CrossPlatform::getRenderer(window_);
 
@@ -164,6 +188,8 @@ void SdlRenderingEngine::InitializeSDL()
 
     game_over_text_ = std::make_shared<TextTexture>(
         *sdl_renderer_,  Constants::GAME_OVER_MESSAGE_X, Constants::GAME_OVER_MESSAGE_Y, "Game Over");
+
+    snake_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, "res\\images\\Snake.png");
 }
 
 void SdlRenderingEngine::processKeyCode(SDL_Event e)
