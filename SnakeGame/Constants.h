@@ -1,6 +1,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <string>
+
 namespace Constants
 {
     // screen parameters
@@ -36,6 +38,9 @@ namespace Constants
     static const double DOWN_ANGLE = 90;
     static const double LEFT_ANGLE = 180;
     static const double UP_ANGLE = 270;
+    
+    static const std::string SNAKE_IMAGE_PATH = "res/images/Snake.png";
+    static const char *FONT_PATH = "res/fonts/arcadeclassic.ttf";
 }
 
 #endif

@@ -1,6 +1,10 @@
 #ifndef CROSSPLATFORMUTILS_H
 #define CROSSPLATFORMUTILS_H
 
+#ifdef __APPLE__
+    #include <mach-o/dyld.h>
+#endif
+
 #include "SDL.h"
 
 namespace CrossPlatform
@@ -16,5 +20,17 @@ namespace CrossPlatform
 #endif
     }
 }
+
+#ifdef __APPLE__
+static void printPath()
+{
+    char path[1024];
+    uint32_t size = sizeof(path);
+    if (_NSGetExecutablePath(path, &size) == 0)
+        printf("executable path is %s\n", path);
+    else
+        printf("buffer too small; need size %u\n", size);
+}
+#endif // __APPLE__
 
 #endif // CROSSPLATFORMUTILS_H

@@ -262,7 +262,7 @@ void SdlRenderingEngine::InitializeSDL()
     game_over_text_ = std::make_shared<TextTexture>(
         *sdl_renderer_,  Constants::GAME_OVER_MESSAGE_X, Constants::GAME_OVER_MESSAGE_Y, "Game Over");
 
-    snake_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, "res\\images\\Snake.png");
+    snake_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, Constants::SNAKE_IMAGE_PATH);
 }
 
 void SdlRenderingEngine::processKeyCode(SDL_Event e)

@@ -1,16 +1,18 @@
 #include "TextTexture.h"
 #include <SDL_ttf.h>
 #include <stdexcept>
+#include "Constants.h"
+#include <string>
 
 TextTexture::TextTexture(SDL_Renderer &renderer,  int x, int y, const std::string& text) :
     sdl_renderer_(renderer)
 {
     text_rect_.x = x;
     text_rect_.y = y;
-    font_ = TTF_OpenFont("res\\fonts\\arcadeclassic.ttf", 40);
+    font_ = TTF_OpenFont(Constants::FONT_PATH, 40);
     if (font_ == nullptr)
     {
-        throw std::runtime_error("Cannot load res\\fonts\\arcadeclassic.ttf");
+        throw std::runtime_error("Cannot load " + std::string(Constants::FONT_PATH));
     }
     updateTextTexture(text);
 }
