@@ -1,5 +1,6 @@
 #include "TextTexture.h"
 #include <SDL_ttf.h>
+#include <stdexcept>
 
 TextTexture::TextTexture(SDL_Renderer &renderer,  int x, int y, const std::string& text) :
     sdl_renderer_(renderer)
@@ -7,6 +8,10 @@ TextTexture::TextTexture(SDL_Renderer &renderer,  int x, int y, const std::strin
     text_rect_.x = x;
     text_rect_.y = y;
     font_ = TTF_OpenFont("res\\fonts\\arcadeclassic.ttf", 40);
+    if (font_ == nullptr)
+    {
+        throw std::runtime_error("Cannot load res\\fonts\\arcadeclassic.ttf");
+    }
     updateTextTexture(text);
 }
 
