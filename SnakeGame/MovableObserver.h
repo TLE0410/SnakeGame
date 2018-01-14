@@ -7,7 +7,7 @@ class MovableObserver
 {
 public:
     virtual ~MovableObserver() = default;
-    virtual void changeDirection(Direction direction) = 0;
+    virtual void changeDirection(const Direction& direction) = 0;
 };
 
 #endif

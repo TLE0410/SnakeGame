@@ -149,7 +149,7 @@ void printDirection(Direction direction)
     }
 }
 
-void Player::changeDirection(Direction direction)
+void Player::changeDirection(const Direction& direction)
 {
     if (!oppositeDirections(moveDirection_, direction))
     {
@@ -157,7 +157,7 @@ void Player::changeDirection(Direction direction)
     }
 }
 
-bool Player::oppositeDirections(Direction direction_one, Direction direction_two)
+bool Player::oppositeDirections(const Direction& direction_one, const Direction& direction_two)
 {
     return (direction_one == up && direction_two == down) 
         || (direction_one == down && direction_two == up) 
@@ -165,7 +165,7 @@ bool Player::oppositeDirections(Direction direction_one, Direction direction_two
         || (direction_one == right && direction_two == left);
 }
 
-void Player::moveSnakeHead(Point2D* const snakeHead, Direction direction)
+void Player::moveSnakeHead(Point2D* const snakeHead, const Direction& direction)
 {
     switch (direction)
     {

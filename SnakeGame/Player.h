@@ -15,7 +15,7 @@ public:
     void render() override;
     void update() override;
 
-    void changeDirection(Direction direction) override;
+    void changeDirection(const Direction& direction) override;
 
     void die();
     int getHeadX();
@@ -40,9 +40,9 @@ private:
     Point2D pointToEraise;
     bool needToIncreaseLength;
 
-    bool oppositeDirections(Direction direction_one, Direction direction_two);
+    bool oppositeDirections(const Direction& direction_one, const Direction& direction_two);
     void moveSnake();
-    void moveSnakeHead(Point2D* const snakeHead, Direction direction);
+    void moveSnakeHead(Point2D* const snakeHead, const Direction& direction);
 };
 
 #endif

@@ -135,10 +135,6 @@ void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart 
     }
 }
 
-void SdlRenderingEngine::renderSnakeBodyPart(int x, int y, SnakeBodyPart bodyPart, const double angle) const
-{
-}
-
 double SdlRenderingEngine::getAngleFromBoxDirection(const BoxDirection& direction) const
 {
     if (direction.next == up && direction.prev == up)  
@@ -190,6 +186,7 @@ double SdlRenderingEngine::getAngleFromDirection(const Direction& direction) con
         return 180;
     if (direction == right)
         return 0;
+    return 0;
 }
 
 void SdlRenderingEngine::renderGameOverBox() const
