@@ -34,7 +34,7 @@ void Border::addTopHorizontalLine()
 
 void Border::addLeftVerticalLine()
 {
-    for (int i = 2; i <= Constants::GAME_FIELD_HEIGHT_CELLS - 1; i++)
+    for (int i = 1; i <= Constants::GAME_FIELD_HEIGHT_CELLS; i++)
     {
         Point2D* p = new Point2D;
         p->x = 0;
@@ -45,7 +45,7 @@ void Border::addLeftVerticalLine()
 
 void Border::addRightVerticalLine()
 {
-    for (int i = 2; i <= Constants::GAME_FIELD_HEIGHT_CELLS - 1; i++)
+    for (int i = 1; i <= Constants::GAME_FIELD_HEIGHT_CELLS; i++)
     {
         Point2D* p = new Point2D;
         p->x = Constants::GAME_FIELD_WIDTH_CELLS + 1;
