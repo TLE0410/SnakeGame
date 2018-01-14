@@ -4,7 +4,7 @@
 #include <memory>
 #include "Border.h"
 #include "CollisionManager.h"
-#include "CloseEventHandler.h"
+#include "UserInputEventHandler.h"
 #include "Fruit.h"
 #include "GameOver.h"
 #include "GameTimer.h"
@@ -14,7 +14,7 @@
 
 using std::unique_ptr;
 
-class Game : public CloseEventHandler
+class Game : public UserInputEventHandler
 {
 public:
     Game();
@@ -24,7 +24,10 @@ public:
     bool isGameOver() const;
     bool running() const;
     void handleCloseEvent() override;
+    void handleNewGameEvent() override;
 private:
+    void gameRestart();
+
     unique_ptr<Renderer> renderer_;
     unique_ptr<Player> player_;
     unique_ptr<Fruit> fruit_;

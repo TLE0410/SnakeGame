@@ -21,7 +21,7 @@ public:
     
     void pollEvents() override;
     void attachMovableObserver(MovableObserver &movableObserver) override;
-    void addCloseEventHandler(CloseEventHandler& closeEventHandler) override;
+    void addUserInputEventHanlder(UserInputEventHandler& closeEventHandler) override;
     void clearScreen() override;
     void renderScreen() override;
     void setText(const std::string textToRender) override;
@@ -46,7 +46,7 @@ private:
     SDL_Surface* screen_surface_ = nullptr;
     SDL_Renderer* sdl_renderer_ = nullptr;
     std::vector<MovableObserver*> movable_observers_;
-    CloseEventHandler* close_event_handler_{};
+    UserInputEventHandler* userInputEventHanlder_{};
     std::shared_ptr<SpriteSheetTexture> snake_texture_;
 };
 

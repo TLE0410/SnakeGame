@@ -46,10 +46,9 @@ void SdlRenderingEngine::pollEvents()
     SDL_Event e;
     while (SDL_PollEvent(&e) != 0)
     {
-        //User requests quit
         if (e.type == SDL_QUIT)
         {
-            close_event_handler_->handleCloseEvent();
+            userInputEventHanlder_->handleCloseEvent();
         }
         else if (e.type == SDL_KEYDOWN)
         {
@@ -63,9 +62,9 @@ void SdlRenderingEngine::attachMovableObserver(MovableObserver& movableObserver)
     movable_observers_.push_back(&movableObserver);
 }
 
-void SdlRenderingEngine::addCloseEventHandler(CloseEventHandler& closeEventHandler)
+void SdlRenderingEngine::addUserInputEventHanlder(UserInputEventHandler& closeEventHandler)
 {
-    close_event_handler_ = &closeEventHandler;
+    userInputEventHanlder_ = &closeEventHandler;
 }
 
 void SdlRenderingEngine::clearScreen()
@@ -78,7 +77,6 @@ void SdlRenderingEngine::renderScreen()
 {
     SDL_RenderPresent(sdl_renderer_);
 }
-
 
 void SdlRenderingEngine::setText(const std::string textToRender)
 {
@@ -277,6 +275,9 @@ void SdlRenderingEngine::processKeyCode(SDL_Event e)
             break;
         case SDLK_RIGHT:
             executeChangeDirection(right);
+            break;
+        case SDLK_RETURN:
+            userInputEventHanlder_->handleNewGameEvent();
             break;
     }
 }

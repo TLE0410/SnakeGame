@@ -107,9 +107,6 @@
     <ClInclude Include="MovableObserver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CloseEventHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="CrossPlatformUtils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -135,6 +132,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BoxDirection.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInputEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

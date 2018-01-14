@@ -3,7 +3,7 @@
 
 #include <string>
 #include "MovableObserver.h"
-#include "CloseEventHandler.h"
+#include "UserInputEventHandler.h"
 #include "Color.h"
 #include "Point2D.h"
 #include "DirectionalPoint2D.h"
@@ -14,7 +14,7 @@ class Renderer
 public:
     virtual ~Renderer() = default;
     virtual void pollEvents() = 0;
-    virtual void addCloseEventHandler(CloseEventHandler &closeEventHandler) = 0;
+    virtual void addUserInputEventHanlder(UserInputEventHandler &closeEventHandler) = 0;
     virtual void attachMovableObserver(MovableObserver &movableObserver) = 0;
     virtual void clearScreen() = 0;
     virtual void renderScreen() = 0;

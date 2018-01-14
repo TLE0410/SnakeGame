@@ -158,7 +158,7 @@ xcopy "$(ProjectDir)res" "$(TargetDir)\res" /r /y /e</Command>
   <ItemGroup>
     <ClInclude Include="Border.h" />
     <ClInclude Include="BoxDirection.h" />
-    <ClInclude Include="CloseEventHandler.h" />
+    <ClInclude Include="UserInputEventHandler.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Constants.h" />

@@ -14,6 +14,7 @@ public:
     Player(Renderer &renderingEngine);
     void render() override;
     void update() override;
+    void reset();
 
     void changeDirection(const Direction& direction) override;
 

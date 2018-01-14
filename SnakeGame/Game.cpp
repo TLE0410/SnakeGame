@@ -33,7 +33,7 @@ void Game::update()
 Game::Game()
 {
     renderer_ = make_unique<SdlRenderingEngine>();
-    renderer_->addCloseEventHandler(*this);
+    renderer_->addUserInputEventHanlder(*this);
     
     player_ = make_unique<Player>(*renderer_);
 
@@ -83,5 +83,20 @@ bool Game::running() const
 void Game::handleCloseEvent()
 {
     isGameActive = false;
+}
+
+void Game::handleNewGameEvent()
+{
+    if (m_isGameOver)
+    {
+        gameRestart();
+    }
+}
+
+void Game::gameRestart()
+{
+    player_->reset();
+    scoreBoard_->updateScore(0);
+    m_isGameOver = false;
 }
 
