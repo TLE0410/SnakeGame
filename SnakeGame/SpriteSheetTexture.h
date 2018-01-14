@@ -7,7 +7,7 @@
 class SpriteSheetTexture
 {
 public:
-    SpriteSheetTexture(SDL_Renderer &renderer, std::string path);
+    SpriteSheetTexture(SDL_Renderer &renderer, const std::string& path);
     ~SpriteSheetTexture();
     void render(int x, int y, SDL_Rect* clip, const double angle) const;
 private:

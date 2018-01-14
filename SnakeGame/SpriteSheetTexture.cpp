@@ -1,7 +1,7 @@
 #include "SpriteSheetTexture.h"
 #include <SDL_image.h>
 
-SpriteSheetTexture::SpriteSheetTexture(SDL_Renderer &renderer, std::string path) :
+SpriteSheetTexture::SpriteSheetTexture(SDL_Renderer &renderer, const std::string& path) :
     sdl_renderer_(renderer)
 {
     SDL_Surface* loadedSurface = nullptr;
