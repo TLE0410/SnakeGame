@@ -26,6 +26,7 @@ public:
     virtual void renderGameOver() const = 0;
 
     virtual void renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const = 0;
+    virtual void renderFruitBox(Point2D point) const = 0;
 };
 
 #endif // RENDERINGENGINE_H

@@ -31,6 +31,7 @@ public:
     double getAngleFromBoxDirection(const BoxDirection& direction) const;
     double getAngleFromDirection(const Direction& direction) const;
     void renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const override;
+    void renderFruitBox(Point2D point) const override;
 
 private:
     void executeChangeDirection(Direction direction);
@@ -48,6 +49,7 @@ private:
     std::vector<MovableObserver*> movable_observers_;
     UserInputEventHandler* userInputEventHanlder_{};
     std::shared_ptr<SpriteSheetTexture> snake_texture_;
+    std::shared_ptr<SpriteSheetTexture> fruit_texture_;
 };
 
 #endif

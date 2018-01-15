@@ -133,6 +133,18 @@ void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart 
     }
 }
 
+void SdlRenderingEngine::renderFruitBox(Point2D point) const
+{
+    const int boxWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
+    const int boxHeight = Constants::GAME_FIELD_HEIGHT_PIXELS / Constants::GAME_FIELD_HEIGHT_CELLS;
+
+    int x = (point.x - 1) * boxWidth;
+    int y = (point.y - 1) * boxHeight;
+
+
+    fruit_texture_->render(x, y, &SpritePositions::APPLE, 0);
+}
+
 double SdlRenderingEngine::getAngleFromBoxDirection(const BoxDirection& direction) const
 {
     if (direction.next == up && direction.prev == up)  
@@ -258,6 +270,7 @@ void SdlRenderingEngine::InitializeSDL()
         *sdl_renderer_,  Constants::GAME_OVER_MESSAGE_X, Constants::GAME_OVER_MESSAGE_Y, "Game Over");
 
     snake_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, Constants::SNAKE_IMAGE_PATH);
+    fruit_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, Constants::SNAKE_IMAGE_PATH);
 }
 
 void SdlRenderingEngine::processKeyCode(SDL_Event e)
