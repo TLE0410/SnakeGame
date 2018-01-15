@@ -18,11 +18,6 @@ void SdlRenderingEngine::renderBox(Point2D point, Color color) const
     renderBox(point.x, point.y, 1, 1, color);
 }
 
-void SdlRenderingEngine::renderDirectionalBox(DirectionalPoint2D point, Color color) const
-{
-    
-}
-
 void SdlRenderingEngine::renderBox(int x, int y, int width, int height, Color color) const
 {
     const int cellWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
@@ -217,6 +212,9 @@ void SdlRenderingEngine::renderGameOverText() const
 {
     SDL_RenderCopy(sdl_renderer_, game_over_text_->getTexture(),
         nullptr, game_over_text_->getTextRect());
+
+    SDL_RenderCopy(sdl_renderer_, new_game_text_->getTexture(),
+        nullptr, new_game_text_->getTextRect());
 }
 
 void SdlRenderingEngine::executeChangeDirection(Direction direction)
@@ -264,10 +262,16 @@ void SdlRenderingEngine::InitializeSDL()
     }
 
     scrore_text_ = std::make_shared<TextTexture>(
-        *sdl_renderer_, 0, Constants::GAME_FIELD_HEIGHT_PIXELS, "Score 0");
+        *sdl_renderer_, 0, Constants::GAME_FIELD_HEIGHT_PIXELS, "Score 0", 
+        Constants::MAIN_FONT_SIZE);
 
     game_over_text_ = std::make_shared<TextTexture>(
-        *sdl_renderer_,  Constants::GAME_OVER_MESSAGE_X, Constants::GAME_OVER_MESSAGE_Y, "Game Over");
+        *sdl_renderer_,  Constants::GAME_OVER_MESSAGE_X, Constants::GAME_OVER_MESSAGE_Y, 
+        "Game Over", Constants::MAIN_FONT_SIZE);
+
+    new_game_text_ = std::make_shared<TextTexture>(
+        *sdl_renderer_, Constants::PRESS_ENTER_MESSAGE_X, Constants::PRESS_ENTER_MESSAGE_Y,
+        "press Enter and try harder", Constants::SMALLER_FONT_SIZE);
 
     snake_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, Constants::SNAKE_IMAGE_PATH);
     fruit_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, Constants::SNAKE_IMAGE_PATH);

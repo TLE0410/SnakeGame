@@ -22,8 +22,10 @@ namespace Constants
     static const int GAME_OVER_BOX_Y = 150;
     static const int GAME_OVER_BOX_WIDTH = 300;
     static const int GAME_OVER_BOX_HEIGHT = 100;
-    static const int GAME_OVER_MESSAGE_X = 50;
-    static const int GAME_OVER_MESSAGE_Y = 150;
+    static const int GAME_OVER_MESSAGE_X = 105;
+    static const int GAME_OVER_MESSAGE_Y = 160;
+    static const int PRESS_ENTER_MESSAGE_X = 65;
+    static const int PRESS_ENTER_MESSAGE_Y = 205;
 
     static const int SNAKE_MOVE_RATE = 300; // in millisecods
 
@@ -32,7 +34,7 @@ namespace Constants
     static const int SNAKE_HEAD_WIDTH = 19;
     static const int APPLE_RADIUS = 10;
 
-    static const char *GAME_WINDOW_TITLE = "Snake Game";
+    static const char *GAME_WINDOW_TITLE = "Snake";
 
     static const double RIGHT_ANGLE = 0;
     static const double DOWN_ANGLE = 90;
@@ -41,6 +43,9 @@ namespace Constants
     
     static const std::string SNAKE_IMAGE_PATH = "res/images/Snake.png";
     static const char *FONT_PATH = "res/fonts/arcadeclassic.ttf";
+
+    static const int MAIN_FONT_SIZE = 40;
+    static const int SMALLER_FONT_SIZE = 22;
 }
 
 #endif

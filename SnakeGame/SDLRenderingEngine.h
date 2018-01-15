@@ -16,7 +16,6 @@ public:
     SdlRenderingEngine();
     ~SdlRenderingEngine();
     void renderBox(Point2D point, Color color) const override;
-    void renderDirectionalBox(DirectionalPoint2D point, Color color) const override;
     void renderBox(int x, int y, int width, int height, Color color) const override;
     
     void pollEvents() override;
@@ -42,6 +41,7 @@ private:
 
     std::shared_ptr<TextTexture> scrore_text_;
     std::shared_ptr<TextTexture> game_over_text_;
+    std::shared_ptr<TextTexture> new_game_text_;
 
     SDL_Window* window_ = nullptr;
     SDL_Surface* screen_surface_ = nullptr;

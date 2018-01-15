@@ -8,7 +8,7 @@
 class TextTexture
 {
 public:
-    TextTexture(SDL_Renderer &renderer, int x, int y, const std::string& text);
+    TextTexture(SDL_Renderer &renderer, int x, int y, const std::string& text, const int fontSize);
     TextTexture() = delete;
     ~TextTexture();
     void updateTextTexture(const std::string& text);
