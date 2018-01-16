@@ -6,7 +6,6 @@
 #include "GameObject.h"
 #include "Direction.h"
 #include "MovableObserver.h"
-#include "BoxDirection.h"
 
 class Player : public GameObject, public MovableObserver
 {
@@ -21,8 +20,8 @@ public:
     void die();
     int getHeadX();
     int getHeadY();
-    DirectionalPoint2D getHeadPosition();
-    Direction getDirection();
+    DirectionalPoint2D getHeadPosition() const;
+    Direction getDirection() const;
     void increaseLength();
     int getLength() const;
 

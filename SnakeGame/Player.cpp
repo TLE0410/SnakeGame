@@ -13,13 +13,15 @@ void Player::render()
     const auto snakeHead = m_snakePositions.front();
     renderer_.renderSnakeBox(*snakeHead, SnakeBodyPart::Head);
 
-    for (auto point = m_snakePositions.begin() + 1;  point != m_snakePositions.end() - 1; ++point )
+    if (m_snakePositions.size() > 1)
     {
-        renderer_.renderSnakeBox(**point, SnakeBodyPart::Body);
+        for (auto point = m_snakePositions.begin() + 1; point != m_snakePositions.end() - 1; ++point)
+        {
+            renderer_.renderSnakeBox(**point, SnakeBodyPart::Body);
+        }
+        const auto snakeTail = m_snakePositions.back();
+        renderer_.renderSnakeBox(*snakeTail, SnakeBodyPart::Tail);
     }
-
-    const auto snakeTail = m_snakePositions.back();
-    renderer_.renderSnakeBox(*snakeTail, SnakeBodyPart::Tail);
 }
 
 void Player::moveSnake()
@@ -69,13 +71,13 @@ void Player::reset()
 {
     m_snakePositions.clear();
 
-    futureMoveDirection_ = Direction::up;
+    futureMoveDirection_ = Direction::right;
     moveDirection_ = futureMoveDirection_;
 
     DirectionalPoint2D* startPosition = new DirectionalPoint2D(
-        Constants::GAME_FIELD_WIDTH_CELLS / 2,
-        Constants::GAME_FIELD_HEIGHT_CELLS / 2,
-        Direction::up);
+        Constants::SNAKE_START_POSITION_X,
+        Constants::SNAKE_START_POSITION_Y,
+        futureMoveDirection_);
 
     m_snakePositions.push_back(startPosition);
 
@@ -83,7 +85,8 @@ void Player::reset()
     {
         m_snakePositions.push_back(
             new DirectionalPoint2D(
-                startPosition->x, startPosition->y + i, Direction::up));
+                //startPosition->x, startPosition->y + i, futureMoveDirection_));
+                startPosition->x - i, startPosition->y, futureMoveDirection_));
     }
 
     needToIncreaseLength = false;
@@ -105,12 +108,12 @@ int Player::getHeadY()
     return m_snakePositions.front()->y;
 }
 
-DirectionalPoint2D Player::getHeadPosition()
+DirectionalPoint2D Player::getHeadPosition() const
 {
     return DirectionalPoint2D(*m_snakePositions[0]);
 }
 
-Direction Player::getDirection()
+Direction Player::getDirection() const
 {
     return futureMoveDirection_;
 }

@@ -14,6 +14,8 @@
 
 using std::unique_ptr;
 
+enum GameState {IN_PROGRESS, WON, LOST};
+
 class Game : public UserInputEventHandler
 {
 public:
@@ -40,7 +42,7 @@ private:
     unique_ptr<GameTimer> gameTimer_;
 
     bool isGameActive = true;
-    bool m_isGameOver = false;
+    GameState gameState_ = IN_PROGRESS;
 };
 
 #endif

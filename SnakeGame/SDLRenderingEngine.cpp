@@ -92,11 +92,8 @@ void SdlRenderingEngine::renderGameOver() const
 
 void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const
 {
-    int boxWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
-    int boxHeight = Constants::GAME_FIELD_HEIGHT_PIXELS / Constants::GAME_FIELD_HEIGHT_CELLS;
-
-    int x = (point.x - 1) * boxWidth;
-    int y = (point.y - 1) * boxHeight;
+    int x = (point.x - 1) * Constants::GAME_CELL_WIDTH_PIXELS;
+    int y = (point.y - 1) * Constants::GAME_CELL_HEIGHT_PIXELS;
 
     double textureRotationAngle = getAngleFromBoxDirection(point.direction);
 
@@ -130,12 +127,8 @@ void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart 
 
 void SdlRenderingEngine::renderFruitBox(Point2D point) const
 {
-    const int boxWidth = Constants::GAME_FIELD_WIDTH_PIXELS / Constants::GAME_FIELD_WIDTH_CELLS;
-    const int boxHeight = Constants::GAME_FIELD_HEIGHT_PIXELS / Constants::GAME_FIELD_HEIGHT_CELLS;
-
-    int x = (point.x - 1) * boxWidth;
-    int y = (point.y - 1) * boxHeight;
-
+    int x = (point.x - 1) * Constants::GAME_CELL_WIDTH_PIXELS;
+    int y = (point.y - 1) * Constants::GAME_CELL_HEIGHT_PIXELS;
 
     fruit_texture_->render(x, y, &SpritePositions::APPLE, 0);
 }

@@ -13,6 +13,7 @@ public:
     void update() override {}
 
     void increaseScore();
+    bool reachedMaxScore() const;
     void updateScore(int newScore);;
 private:
     void updateRenderedText() const;

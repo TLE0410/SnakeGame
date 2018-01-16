@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "SDLRenderingEngine.h"
 #include "Constants.h"
+#include "Utils.h"
 
 using std::make_unique;
 
@@ -13,15 +14,22 @@ void Game::update()
     {
         if (collisionManger_->checkPlayerAndBorderCollision(*player_, *border_))
         {
-            m_isGameOver = true;
+            gameState_ = GameState::LOST;
         }
-
-        if (collisionManger_->checkPlayerAndFruitCollision(*player_, *fruit_))
+        else if (collisionManger_->checkPlayerAndFruitCollision(*player_, *fruit_))
         {
             scoreBoard_->increaseScore();
-        }
-
-        if (collisionManger_->checkPlayerCollideItself(*player_))
+            player_->increaseLength();
+            if (scoreBoard_->reachedMaxScore())
+            {
+                gameState_ = GameState::WON;
+            }
+            else
+            {
+                fruit_->generateNewPosition();
+            }
+        } 
+        else if (collisionManger_->checkPlayerCollideItself(*player_))
         {
             scoreBoard_->updateScore(player_->getLength() - Constants::SNAKE_INITIAL_LENGTH);
         }
@@ -63,7 +71,7 @@ void Game::render() const
     player_->render();
     scoreBoard_->render();
 
-    if (m_isGameOver)
+    if (gameState_ == GameState::LOST)
     {
         gameOver_->render();
     }
@@ -72,7 +80,7 @@ void Game::render() const
 
 bool Game::isGameOver() const
 {
-    return m_isGameOver;
+    return (gameState_ != GameState::IN_PROGRESS);
 }
 
 bool Game::running() const
@@ -87,7 +95,7 @@ void Game::handleCloseEvent()
 
 void Game::handleNewGameEvent()
 {
-    if (m_isGameOver)
+    if (gameState_)
     {
         gameRestart();
     }
@@ -97,6 +105,6 @@ void Game::gameRestart()
 {
     player_->reset();
     scoreBoard_->updateScore(0);
-    m_isGameOver = false;
+    gameState_ = IN_PROGRESS;
 }
 

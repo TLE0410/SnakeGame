@@ -1,15 +1,13 @@
 #include "CollisionManager.h"
 #include "Utils.h"
 
-bool CollisionManager::checkPlayerAndFruitCollision(Player & player, Fruit & fruit) const
+bool CollisionManager::checkPlayerAndFruitCollision(const Player& player, const Fruit& fruit) const
 {
     DirectionalPoint2D headNextPosition = 
         Utils::getNextPosition(player.getHeadPosition(), player.getDirection());
 
     if (headNextPosition.equals(fruit.getPosition()))
     {
-        player.increaseLength();
-        fruit.generateNewPosition();
         return true;
     }
     return false;

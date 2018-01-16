@@ -1,6 +1,7 @@
 #include "ScoreBoard.h"
 #include "Constants.h"
 #include <string>
+#include "Utils.h"
 
 ScoreBoard::ScoreBoard(Renderer &renderer) : 
     GameObject(renderer), score_(0)
@@ -17,6 +18,14 @@ void ScoreBoard::increaseScore()
 {
     score_++;
     updateRenderedText();
+#ifdef _DEBUG
+    Utils::Log("score " + std::to_string(score_));
+#endif
+}
+
+bool ScoreBoard::reachedMaxScore() const
+{
+    return (score_ >= Constants::MAX_SCORE);
 }
 
 void ScoreBoard::render()

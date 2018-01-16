@@ -6,18 +6,22 @@
 namespace Constants
 {
     // screen parameters
-    static const int SCREEN_WIDTH = 400;
-    static const int SCREEN_HEIGHT = 440;
-
     static const int GAME_FIELD_WIDTH_CELLS = 10;
-    static const int GAME_FIELD_HEIGHT_CELLS = 10;
+    static const int GAME_FIELD_HEIGHT_CELLS = 2;
+
+    static const int GAME_CELL_WIDTH_PIXELS = 40;
+    static const int GAME_CELL_HEIGHT_PIXELS = 40;
+
+    // 400 by 400 pixels
+    static const int SCREEN_WIDTH = GAME_FIELD_WIDTH_CELLS * GAME_CELL_WIDTH_PIXELS;
+    static const int SCORE_BOARD_WIDTH_PIXELS = SCREEN_WIDTH;
+
+    static const int SCORE_BOARD_HEIGHT_PIXELS = 40;
+    static const int SCREEN_HEIGHT = GAME_FIELD_HEIGHT_CELLS * GAME_CELL_HEIGHT_PIXELS + SCORE_BOARD_HEIGHT_PIXELS;
 
     static const int GAME_FIELD_WIDTH_PIXELS = SCREEN_WIDTH;
-    static const int GAME_FIELD_HEIGHT_PIXELS = 400;
-
-    static const int SCORE_BOARD_WIDTH_PIXELS = SCREEN_WIDTH;
-    static const int SCORE_BOARD_HEIGHT_PIXELS = SCREEN_HEIGHT - GAME_FIELD_HEIGHT_PIXELS;
-
+    static const int GAME_FIELD_HEIGHT_PIXELS = SCREEN_WIDTH;
+    
     static const int GAME_OVER_BOX_X = 50;
     static const int GAME_OVER_BOX_Y = 150;
     static const int GAME_OVER_BOX_WIDTH = 300;
@@ -30,9 +34,9 @@ namespace Constants
     static const int SNAKE_MOVE_RATE = 300; // in millisecods
 
     static const int SNAKE_INITIAL_LENGTH = 3;
-    static const int SNAKE_BODY_WIDTH = 15;
-    static const int SNAKE_HEAD_WIDTH = 19;
-    static const int APPLE_RADIUS = 10;
+    static const int MAX_SCORE = GAME_FIELD_HEIGHT_CELLS * GAME_FIELD_HEIGHT_CELLS - SNAKE_INITIAL_LENGTH;
+    static const int SNAKE_START_POSITION_X = 3;
+    static const int SNAKE_START_POSITION_Y = 1;
 
     static const char *GAME_WINDOW_TITLE = "Snake";
 

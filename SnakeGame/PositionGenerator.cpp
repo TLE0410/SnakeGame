@@ -5,6 +5,14 @@
 
 bool PositionGenerator::newPositionCollidesWithSnake(Point2D newPosition) const
 {
+    DirectionalPoint2D headNextPosition =
+         Utils::getNextPosition(player_.getHeadPosition(), player_.getDirection());
+    
+    if (headNextPosition.equals(newPosition))
+    {
+        return true;
+    }
+
     for (auto point = player_.body_begins(); point != player_.body_ends(); ++point)
     {
         if ((*point)->equals(newPosition))
@@ -12,6 +20,7 @@ bool PositionGenerator::newPositionCollidesWithSnake(Point2D newPosition) const
             return true;
         }
     }
+
     return  false;
 }
 
