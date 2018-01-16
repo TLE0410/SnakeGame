@@ -39,5 +39,27 @@ void SpriteSheetTexture::render(int x, int y, SDL_Rect* clip, const double angle
         renderQuad.h = clip->h;
     }
 
-    SDL_RenderCopyEx(&sdl_renderer_, texture_, clip, &renderQuad, angle, NULL, SDL_FLIP_NONE);
+    renderQuad = alignSDLRectIfRoted(renderQuad, angle);
+
+    SDL_RenderCopyEx(&sdl_renderer_, texture_, clip, &renderQuad, angle, nullptr, SDL_FLIP_NONE);
+}
+
+// this is a workaround to SDL issue with rotating in int coordinates
+// https://forums.libsdl.org/viewtopic.php?p=51661
+SDL_Rect& SpriteSheetTexture::alignSDLRectIfRoted(SDL_Rect& rend_quad, const double& angle)
+{
+    if (angle == 90.0)
+    {
+        rend_quad.x--;
+    }
+    else  if (angle == 180.0)
+    {
+        rend_quad.x--;
+        rend_quad.y--;
+    }
+    else if (angle == 270.0)
+    {
+        rend_quad.y--;
+    }
+    return rend_quad;
 }

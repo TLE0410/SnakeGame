@@ -11,6 +11,7 @@ public:
     ~SpriteSheetTexture();
     void render(int x, int y, SDL_Rect* clip, const double angle) const;
 private:
+    static SDL_Rect& alignSDLRectIfRoted(SDL_Rect& rend_quad, const double& angle);
     int width_;
     int height_;
     SDL_Texture *texture_;
