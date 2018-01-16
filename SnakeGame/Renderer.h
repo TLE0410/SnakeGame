@@ -22,7 +22,8 @@ public:
     virtual void renderBox(int x, int y, int width, int height, Color color) const = 0;
     virtual void setText(const std::string textToRender) = 0;
     virtual void renderText() = 0;
-    virtual void renderGameOver() const = 0;
+    virtual void renderGameLost() const = 0;
+    virtual void renderGameWon() const = 0;
 
     virtual void renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const = 0;
     virtual void renderFruitBox(Point2D point) const = 0;

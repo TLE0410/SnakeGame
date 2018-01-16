@@ -6,15 +6,13 @@
 #include "CollisionManager.h"
 #include "UserInputEventHandler.h"
 #include "Fruit.h"
-#include "GameOver.h"
+#include "GameState.h"
 #include "GameTimer.h"
 #include "Player.h"
 #include "Renderer.h"
 #include "ScoreBoard.h"
 
 using std::unique_ptr;
-
-enum GameState {IN_PROGRESS, WON, LOST};
 
 class Game : public UserInputEventHandler
 {
@@ -23,7 +21,6 @@ public:
     void handleInput() const;
     void update();
     void render() const;
-    bool isGameOver() const;
     bool running() const;
     void handleCloseEvent() override;
     void handleNewGameEvent() override;
@@ -35,14 +32,13 @@ private:
     unique_ptr<Fruit> fruit_;
     unique_ptr<Border> border_;
     unique_ptr<ScoreBoard> scoreBoard_;
-    unique_ptr<GameOver> gameOver_;
+    unique_ptr<GameState> gameOver_;
     unique_ptr<CollisionManager> collisionManger_;
     unique_ptr<PositionGenerator> positionGenerator_;
 
     unique_ptr<GameTimer> gameTimer_;
 
     bool isGameActive = true;
-    GameState gameState_ = IN_PROGRESS;
 };
 
 #endif

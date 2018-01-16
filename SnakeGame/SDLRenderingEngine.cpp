@@ -84,10 +84,15 @@ void SdlRenderingEngine::renderText()
         nullptr, scrore_text_->getTextRect());
 }
 
-void SdlRenderingEngine::renderGameOver() const
+void SdlRenderingEngine::renderGameLost() const
 {
     renderGameOverBox();
     renderGameOverText();
+}
+
+void SdlRenderingEngine::renderGameWon() const
+{
+    // ...
 }
 
 void SdlRenderingEngine::renderSnakeBox(DirectionalPoint2D point, SnakeBodyPart bodyPart) const

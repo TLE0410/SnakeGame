@@ -25,7 +25,8 @@ public:
     void renderScreen() override;
     void setText(const std::string textToRender) override;
     void renderText() override;
-    void renderGameOver() const override;
+    void renderGameLost() const override;
+    void renderGameWon() const override;
 
     double getAngleFromBoxDirection(const BoxDirection& direction) const;
     double getAngleFromDirection(const Direction& direction) const;

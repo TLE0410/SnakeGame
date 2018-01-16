@@ -10,11 +10,16 @@ using std::make_unique;
 
 void Game::update()
 {
+    if (gameOver_->getState() != IN_PROGRESS)
+    {
+        return;
+    }
+
     if (gameTimer_->timeToMovePlayer())
     {
         if (collisionManger_->checkPlayerAndBorderCollision(*player_, *border_))
         {
-            gameState_ = GameState::LOST;
+            gameOver_->setState(LOST);
         }
         else if (collisionManger_->checkPlayerAndFruitCollision(*player_, *fruit_))
         {
@@ -22,7 +27,7 @@ void Game::update()
             player_->increaseLength();
             if (scoreBoard_->reachedMaxScore())
             {
-                gameState_ = GameState::WON;
+                gameOver_->setState(WON);
             }
             else
             {
@@ -52,7 +57,7 @@ Game::Game()
     renderer_->attachMovableObserver(*player_);
 
     scoreBoard_ = make_unique<ScoreBoard>(*renderer_);
-    gameOver_ = make_unique<GameOver>(*renderer_);
+    gameOver_ = make_unique<GameState>(*renderer_);
 
     collisionManger_ = make_unique<CollisionManager>();
     gameTimer_ = make_unique<GameTimer>();
@@ -70,17 +75,8 @@ void Game::render() const
     fruit_->render();
     player_->render();
     scoreBoard_->render();
-
-    if (gameState_ == GameState::LOST)
-    {
-        gameOver_->render();
-    }
+    gameOver_->render();
     renderer_->renderScreen();
-}
-
-bool Game::isGameOver() const
-{
-    return (gameState_ != GameState::IN_PROGRESS);
 }
 
 bool Game::running() const
@@ -95,7 +91,7 @@ void Game::handleCloseEvent()
 
 void Game::handleNewGameEvent()
 {
-    if (gameState_)
+    if (gameOver_->getState() != IN_PROGRESS)
     {
         gameRestart();
     }
@@ -105,6 +101,6 @@ void Game::gameRestart()
 {
     player_->reset();
     scoreBoard_->updateScore(0);
-    gameState_ = IN_PROGRESS;
+    gameOver_->setState(IN_PROGRESS);
 }
 

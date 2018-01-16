@@ -7,7 +7,7 @@ namespace Constants
 {
     // screen parameters
     static const int GAME_FIELD_WIDTH_CELLS = 10;
-    static const int GAME_FIELD_HEIGHT_CELLS = 2;
+    static const int GAME_FIELD_HEIGHT_CELLS = 10;
 
     static const int GAME_CELL_WIDTH_PIXELS = 40;
     static const int GAME_CELL_HEIGHT_PIXELS = 40;
@@ -34,7 +34,7 @@ namespace Constants
     static const int SNAKE_MOVE_RATE = 300; // in millisecods
 
     static const int SNAKE_INITIAL_LENGTH = 3;
-    static const int MAX_SCORE = GAME_FIELD_HEIGHT_CELLS * GAME_FIELD_HEIGHT_CELLS - SNAKE_INITIAL_LENGTH;
+    static const int MAX_SCORE = GAME_FIELD_HEIGHT_CELLS * GAME_FIELD_WIDTH_CELLS - SNAKE_INITIAL_LENGTH;
     static const int SNAKE_START_POSITION_X = 3;
     static const int SNAKE_START_POSITION_Y = 1;
 
