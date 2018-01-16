@@ -43,7 +43,7 @@ void TextTexture::updateText(const std::string& text)
     updateTextTexture(text);
 }
 
-SDL_Rect* TextTexture::getTextRect()
+const SDL_Rect* TextTexture::getTextRect() const
 {
     return &text_rect_;
 }

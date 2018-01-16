@@ -35,14 +35,18 @@ public:
 
 private:
     void executeChangeDirection(Direction direction);
+    void initializeGameOverText();
     void InitializeSDL();
     void processKeyCode(SDL_Event e);
     void renderGameOverBox() const;
-    void renderGameOverText() const;
+    void renderGameOverText(const TextTexture& large_text, const TextTexture& small_text) const;
 
     std::shared_ptr<TextTexture> scrore_text_;
-    std::shared_ptr<TextTexture> game_over_text_;
-    std::shared_ptr<TextTexture> new_game_text_;
+    std::shared_ptr<TextTexture> game_lost_text_large_;
+    std::shared_ptr<TextTexture> game_lost_text_small_;
+
+    std::shared_ptr<TextTexture> game_won_text_large_;
+    std::shared_ptr<TextTexture> game_won_text_small_;
 
     SDL_Window* window_ = nullptr;
     SDL_Surface* screen_surface_ = nullptr;

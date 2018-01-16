@@ -13,7 +13,7 @@ public:
     ~TextTexture();
     void updateTextTexture(const std::string& text);
     void updateText(const std::string& text);
-    SDL_Rect* getTextRect();
+    const SDL_Rect* getTextRect() const;
     SDL_Texture* getTexture() const;
 private:
     SDL_Texture* createTextTexture(const char* textToRender) const;
