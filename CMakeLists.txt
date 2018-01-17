@@ -13,8 +13,6 @@ include_directories(${SDL2_INCLUDE_DIR}
                     ${SDL2_IMAGE_INCLUDE_DIR}
                     ${SDL2_TTF_INCLUDE_DIR})
 
-
-
 include_directories(SnakeGame)
 
 file(GLOB SOURCES "SnakeGame/*.cpp" "SnakeGame/*.h")
@@ -24,3 +22,8 @@ add_executable(snakegame ${SOURCES})
 target_link_libraries(snakegame ${SDL2_LIBRARY}
                             ${SDL2_IMAGE_LIBRARY}
                             ${SDL2_TTF_LIBRARY})
+
+file(COPY ${PROJECT_SOURCE_DIR}/SnakeGame/res/fonts/arcadeclassic.ttf
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/res/fonts/)
+file(COPY ${PROJECT_SOURCE_DIR}/SnakeGame/res/images/Snake.png
+     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/res/images/)
