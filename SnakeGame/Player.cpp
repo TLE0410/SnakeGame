@@ -155,6 +155,8 @@ void printDirection(Direction direction)
             break;
         case right:
             break;
+        default:
+            break;
     }
 }
 
@@ -189,6 +191,8 @@ void Player::moveSnakeHead(Point2D* const snakeHead, const Direction& direction)
             break;
         case right:
             (snakeHead->x)++;
+            break;
+        default:
             break;
     }
 }

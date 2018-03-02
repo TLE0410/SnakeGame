@@ -41,6 +41,11 @@ namespace Utils
                 resultPoint.x--;
                 break;
             }
+            default:
+            {
+                break;
+            }
+
         }
         return resultPoint;
     }
