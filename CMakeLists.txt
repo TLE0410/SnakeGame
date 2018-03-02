@@ -13,16 +13,21 @@ include_directories(${SDL2_INCLUDE_DIR}
 
 include_directories(SnakeGame)
 
+# game source code files
 file(GLOB SOURCES "SnakeGame/*.cpp" "SnakeGame/*.h")
 
+# list all the fonts used by the game
 set(FONT_RESOURCES
         SnakeGame/res/fonts/arcadeclassic.ttf)
 
-set_property(
-        SOURCE "${FONT_RESOURCES}"
-        PROPERTY MACOSX_PACKAGE_LOCATION "Resources/fonts")
+# list all the images used by the game
+set(IMAGE_RESOURCES
+        SnakeGame/res/images/Snake.png)
 
-add_executable(snakegame MACOSX_BUNDLE ${SOURCES} ${FONT_RESOURCES})
+set_property(SOURCE "${FONT_RESOURCES}" PROPERTY MACOSX_PACKAGE_LOCATION "Resources/fonts")
+set_property(SOURCE "${IMAGE_RESOURCES}" PROPERTY MACOSX_PACKAGE_LOCATION "Resources/images")
+
+add_executable(snakegame MACOSX_BUNDLE ${SOURCES} ${FONT_RESOURCES} ${IMAGE_RESOURCES})
 
 set_target_properties(snakegame PROPERTIES
         MACOSX_BUNDLE TRUE
