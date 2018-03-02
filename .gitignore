@@ -3,6 +3,9 @@ Release/
 
 SnakeGame/Debug/
 SnakeGame/Release/
+.idea/
+cmake-build-debug/
+build/
 
 *.db
 *.aps
