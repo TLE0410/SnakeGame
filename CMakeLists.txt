@@ -1,7 +1,5 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 3.9)
 project(snakegame)
-
-set (CMAKE_CXX_STANDARD 14)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/SnakeGame/cmake/")
 
@@ -17,13 +15,21 @@ include_directories(SnakeGame)
 
 file(GLOB SOURCES "SnakeGame/*.cpp" "SnakeGame/*.h")
 
-add_executable(snakegame ${SOURCES}) 
+set(FONT_RESOURCES
+        SnakeGame/res/fonts/arcadeclassic.ttf)
+
+set_property(
+        SOURCE "${FONT_RESOURCES}"
+        PROPERTY MACOSX_PACKAGE_LOCATION "Resources/fonts")
+
+add_executable(snakegame MACOSX_BUNDLE ${SOURCES} ${FONT_RESOURCES})
+
+set_target_properties(snakegame PROPERTIES
+        MACOSX_BUNDLE TRUE
+        MACOSX_FRAMEWORK_IDENTIFIER org.cmake.ExecutableTarget)
+
+set_property(TARGET snakegame PROPERTY CXX_STANDARD 14)
 
 target_link_libraries(snakegame ${SDL2_LIBRARY}
                             ${SDL2_IMAGE_LIBRARY}
                             ${SDL2_TTF_LIBRARY})
-
-file(COPY ${PROJECT_SOURCE_DIR}/SnakeGame/res/fonts/arcadeclassic.ttf
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/res/fonts/)
-file(COPY ${PROJECT_SOURCE_DIR}/SnakeGame/res/images/Snake.png
-     DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/res/images/)
