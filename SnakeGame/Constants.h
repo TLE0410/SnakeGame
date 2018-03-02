@@ -44,9 +44,13 @@ namespace Constants
     static const double DOWN_ANGLE = 90;
     static const double LEFT_ANGLE = 180;
     static const double UP_ANGLE = 270;
-    
-    static const std::string SNAKE_IMAGE_PATH = "res/images/Snake.png";
-    static const char *FONT_PATH = "res/fonts/arcadeclassic.ttf";
+
+#ifdef _WIN32 // for OSX we don't need it as we use bundle 'Resources' folder
+    static const std::string RES_LOCATION = "/res";
+#endif
+
+    static const std::string SNAKE_IMAGE_PATH = "/images/Snake.png";
+    static const std::string FONT_PATH = "/fonts/arcadeclassic.ttf";
 
     static const int MAIN_FONT_SIZE = 40;
     static const int SMALLER_FONT_SIZE = 22;

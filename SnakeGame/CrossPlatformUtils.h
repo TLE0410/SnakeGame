@@ -3,6 +3,7 @@
 
 #ifdef __APPLE__
     #include <mach-o/dyld.h>
+    #include "CoreFoundation/CoreFoundation.h"
 #endif
 
 #include "SDL.h"
@@ -19,6 +20,25 @@ namespace CrossPlatform
         return SDL_GetRenderer(window);
 #endif
     }
+
+    static std::string getResourcesPath()
+    {
+#ifdef _WIN32
+        // return current application path + "/res/"
+#else
+        CFBundleRef mainBundle = CFBundleGetMainBundle();
+        CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
+        char path[PATH_MAX];
+        if (!CFURLGetFileSystemRepresentation(resourcesURL, TRUE, (UInt8 *)path, PATH_MAX))
+        {
+            throw std::runtime_error("Could not open Resources folder");
+        }
+        CFRelease(resourcesURL);
+
+        return std::string(path);
+#endif
+    }
+
 }
 
 #ifdef __APPLE__

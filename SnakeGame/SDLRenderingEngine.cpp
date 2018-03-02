@@ -285,8 +285,9 @@ void SdlRenderingEngine::InitializeSDL()
 
     initializeGameOverText();
 
-    snake_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, Constants::SNAKE_IMAGE_PATH);
-    fruit_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, Constants::SNAKE_IMAGE_PATH);
+    std::string imagePath = CrossPlatform::getResourcesPath() + Constants::SNAKE_IMAGE_PATH;
+    snake_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, imagePath);
+    fruit_texture_ = std::make_shared<SpriteSheetTexture>(*sdl_renderer_, imagePath);
 }
 
 void SdlRenderingEngine::processKeyCode(SDL_Event e)

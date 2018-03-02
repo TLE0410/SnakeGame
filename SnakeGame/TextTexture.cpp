@@ -2,17 +2,20 @@
 #include <SDL_ttf.h>
 #include <stdexcept>
 #include "Constants.h"
-#include <string>
+#include "CrossPlatformUtils.h"
+#include <iostream>
 
 TextTexture::TextTexture(SDL_Renderer &renderer,  int x, int y, const std::string& text, const int fontSize) :
     sdl_renderer_(renderer)
 {
     text_rect_.x = x;
     text_rect_.y = y;
-    font_ = TTF_OpenFont(Constants::FONT_PATH, fontSize);
+    const std::string fontPath = CrossPlatform::getResourcesPath() + Constants::FONT_PATH;
+    font_ = TTF_OpenFont(fontPath.c_str(), fontSize);
+
     if (font_ == nullptr)
     {
-        throw std::runtime_error("Cannot load " + std::string(Constants::FONT_PATH));
+        throw std::runtime_error("Cannot load " + fontPath);
     }
     updateTextTexture(text);
 }
